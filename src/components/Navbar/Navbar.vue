@@ -30,9 +30,9 @@ export default {
    }
 }
 </script>
-<style>
+<style scoped>
 
-header{
+.Navbar{
     display:  -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
