@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar route1="Home" route2="About" route3="Contact" route4="LogIn" route5="SignUp" route6="HelloWorld"/>
+    <Navbar route1="Inicio" route2="About" route3="Contact" route4="LogIn" route5="SignUp" route6="HelloWorld"/>
     <router-view/>
   </div>
 </template>
