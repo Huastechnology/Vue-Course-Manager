@@ -4,16 +4,7 @@
                 <a href="#" class="logo">A&A</a>
                 <div class="text-area">
                     <h2>Enviamos tus comentarios</h2>
-                    <div>
-                        <input class="input-area" type="text" placeholder="name">
-                    </div>
-                    <div>
-                        <input class="input-area" type="text" placeholder="correo">
-                    </div>
-                    <div>
-                        <label>Mensaje</label>
-                        <input class="mensaje" type="text" placeholder="Mensaje">
-                    </div>
+                    <button class="btn-feedback">Feedback</button>
                 </div>
                 <div class="text-area">
                     <h3>Contact whit us</h3>
@@ -96,4 +87,16 @@ export default {
     .input-area{
         width: 14.5rem;
     }
+
+    .btn-feedback{
+        background: #90afc5;
+        border-radius: 20%;
+        height: 50px;
+        width: 200px;
+    }
+
+    .btn-feedback:hover{
+        background: #336B87;
+    }
+
 </style>
