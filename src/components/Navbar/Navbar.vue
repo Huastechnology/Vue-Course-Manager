@@ -1,9 +1,9 @@
 <template>
     <header class="Navbar">
-        <a href="#" class="logo">A&A</a>
+        <router-link to="/" class="logo">A&A</router-link >
             <nav>
                 <ul class="nav-area">
-                    <li> <router-link to="/home" class="a">{{ route1 }}</router-link></li>
+                    <li> <router-link to="/" class="a">{{ route1 }}</router-link></li>
                     <li> <router-link to="/about" class="a">{{ route2 }}</router-link></li>
                     <li> <router-link to="/contact" class="a">{{ route3 }}</router-link></li>
                     <li> <router-link to="/helloWorld" class="a">{{ route6 }}</router-link></li>
