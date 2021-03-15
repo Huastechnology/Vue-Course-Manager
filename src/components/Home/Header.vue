@@ -19,7 +19,7 @@ export default {
 <style scoped>
 .header2{
     background: #C7D7F2;
-    width: 90%;
+    width: 100%;
     margin-top: 15px;
     height: 650px;
     padding: 5%;
