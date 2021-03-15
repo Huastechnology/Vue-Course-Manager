@@ -7,7 +7,7 @@
                     <button class="btn-feedback">Feedback</button>
                 </div>
                 <div class="text-area">
-                    <h3>Contact whit us</h3>
+                    <h3>Contact us</h3>
                     <h2 class="" >+52 9994996922</h2>
                     <h2>A&A@gmail.com</h2>
                 </div>
