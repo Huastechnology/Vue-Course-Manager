@@ -1,23 +1,37 @@
 <template>
-        <footer> 
-            <div class="footer2">
-                <a href="#" class="logo">A&A</a>
-                <div class="text-area">
-                    <h2>Enviamos tus comentarios</h2>
-                    <button class="btn-feedback">Feedback</button>
-                </div>
-                <div class="text-area">
-                    <h3>Contact us</h3>
-                    <h2 class="" >+52 9994996922</h2>
-                    <h2>A&A@gmail.com</h2>
-                </div>
-            </div>
-            <div class="footer2">
-                <div class="text-area">
-                    <h3>A&A Derechos recervados 2021</h3>
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Servicios</h3>
+                        <ul>
+                            <li><a href="#">Clases</a></li>
+                            <li><a href="#">Asesorias</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Acerca de</h3>
+                        <ul>
+                            <li><a href="#">Compania</a></li>
+                            <li><a href="#">Equipo</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Contactos</h3>
+                        <ul>
+                            <li><a href="#">Email</a></li>
+                            <li><a href="#">Telefono</a></li>
+                            <li><a href="#">Whatsapp</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">A&A © 2021</p>
+                    </div>
                 </div>
             </div>
         </footer>
+    </div>
 </template>
 
 <script>
@@ -28,75 +42,88 @@ export default {
 
 <style>
 
-    .footer2{
-        display:  -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flex;
-        display: -o-flex;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    
-        background-color: #000;
-        margin-top: 5px;
-        width: 100%;
-        height: 180px;
-    }
+.footer-clean{
+    background: black;
+}
 
-    .footer2:nth-child(2n){
-        margin-top: 0px;
-        justify-content: center;
-        text-decoration-line: overline;
-        color: #90afc5;
-        text-align: center;
+.footer-clean h3{
+    color:white;
+}
 
-    }
+.footer-clean ul {
+  padding:10%;
+  list-style:none;
+  line-height:1.6;
+  font-size:14px;
+  margin-bottom:0;
+}
 
-    .logo{
-        color:#fff;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        text-decoration: none;
-        padding: 0px 30px;
-    }
-    .btn-area{
-        cursor: pointer;
-        color: #fff;
-        font-size: 16px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        padding: 20px 30px;
-        border-radius: 5px;
-        background: #d22938;
-        margin-right: 20px;
-        text-decoration: none;
-    }
-    .btn-area:hover:hover{
-        background: #c51120;
-    }
-    .nav-button{
-        padding: 0px 20px;
-    }
-    .text-area{
-        color: #336B87;
+.footer-clean ul a {
+  color:white;
+  text-decoration:none;
+  opacity:0.8;
+}
 
-    }
-    .mensaje{
-        height: 6rem;
-    }
-    .input-area{
-        width: 14.5rem;
-    }
+.footer-clean ul a:hover {
+  opacity:1;
+}
 
-    .btn-feedback{
-        background: #90afc5;
-        border-radius: 20%;
-        height: 50px;
-        width: 200px;
-    }
+.footer-clean .item.social {
+  text-align:right;
+  color: white;
+}
 
-    .btn-feedback:hover{
-        background: #336B87;
-    }
+@media (max-width:767px) {
+  .footer-clean .item {
+    text-align:center;
+    padding-bottom:20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-clean .item.social {
+    text-align:center;
+  }
+}
+
+.footer-clean .item.social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid #ccc;
+  margin-left:10px;
+  margin-top:22px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-clean .item.social > a:hover {
+  opacity:0.9;
+}
+
+@media (max-width:991px) {
+  .footer-clean .item.social > a {
+    margin-top:40px;
+  }
+}
+
+@media (max-width:767px) {
+  .footer-clean .item.social > a {
+    margin-top:10px;
+  }
+}
+
+.footer-clean .copyright {
+  color: white;
+  margin-top:14px;
+  margin-bottom:0;
+  font-size:13px;
+  opacity:0.6;
+}
+
 
 </style>
