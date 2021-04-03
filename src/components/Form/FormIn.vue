@@ -1,23 +1,55 @@
 <template>
     <div class="container">
-        <form class="login-signIn">
+        <form class="login-signIn" @submit.prevent="handleLogin">
             <div class="avatar">
                 <img src="../../assets/a&a.png" alt="avatar-A&A">
             </div>
 
             <span class="title">account login</span>
             
-            <input class="login" type="email" name="email" placeholder="E-mail">
-            <input class="login" type="password" name="password" placeholder="Password">
+            <input class="login" type="email" name="email" v-model="user.email" placeholder="E-mail">
+            <input class="login" type="password" name="password" v-model="user.password" placeholder="Password">
             <button class="boton" type="submit">Login</button>
         </form>
     </div>
 </template>
 
 <script>
+import User from "../../models/user";
 export default {
-	name: 'FormIn'
-}
+  name: "FormIn",
+  data: () => ({
+    user: new User("", ""),
+  }),
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push("/");
+    }
+  },
+  methods: {
+    handleLogin(){
+      console.log("you have done click");
+      if (this.user.email && this.user.password) {
+        this.$store.dispatch("auth/login", this.user).then(
+          () => {
+            this.$router.push("/");
+          },
+          (error) => {
+            alert( 
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString())
+          }
+        );
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
