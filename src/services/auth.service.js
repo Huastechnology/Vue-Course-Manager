@@ -9,26 +9,29 @@ class AuthService {
             email: user.email,
             password: user.password
         }) .then(response => {
-            if(response.data.accessToken){
+            if(response.data.token){
                 localStorage.setItem('user', JSON.stringify(response.data))
                 localStorage.setItem('id', JSON.stringify(response.data.id))
+                localStorage.setItem('token', response.data.token)
             }
-
             return response.data
-
         })
     }
     logout(){
         localStorage.removeItem('user')
         localStorage.removeItem('id')
+        localStorage.removeItem('token')
     }
     register(user){
-        return axios.post(API_URL, 'user',{
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.post(API_URL + 'user',{
             completeName: user.completeName,
             phone: user.phone,
             email: user.email,
             password: user.password
-        })
+        }, config)
     }
 }
 
