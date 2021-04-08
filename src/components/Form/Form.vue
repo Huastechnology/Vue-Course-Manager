@@ -57,7 +57,6 @@ export default {
   }),
 	methods: {
 		handleSignUp() {
-			console.log(this.user)
 			this.$store.dispatch("auth/register", this.user).then(
 				() => {
             this.$refs.form.reset()
