@@ -130,7 +130,7 @@ export default {
 
 	.limiter {
   width: 90%;
-	margin-top: 35px;
+	margin-top: 4%;
 	margin-left: 200px;
 	}
 
