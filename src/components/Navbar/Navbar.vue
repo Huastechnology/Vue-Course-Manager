@@ -6,7 +6,7 @@
                     <li> <router-link to="/" class="a">{{ route1 }}</router-link></li>
                     <li> <router-link to="/about" class="a">{{ route2 }}</router-link></li>
                     <li> <router-link to="/contact" class="a">{{ route3 }}</router-link></li>
-                    <li> <router-link to="/dashboard" class="a">{{ route6 }}</router-link></li>
+                    <li> <router-link to="/dashboard" class="a" v-if="currentUser">{{ route6 }}</router-link></li>
                 </ul>
             </nav>
         <nav class="nav-button" v-if="!currentUser">
@@ -14,7 +14,7 @@
         </nav>
         <nav class="nav-button" v-if="currentUser">
             <router-link to="/signUp" class="btn-area">{{ route5 }}</router-link>
-            <router-link @click.prevent="logOut" class="btn-area">{{ route7 }}</router-link>
+            <a @click.prevent="logOut" class="btn-area">{{ route7 }}</a>
         </nav>
     </header>
 </template>
