@@ -24,14 +24,24 @@
 <script>
 import { Fragment } from 'vue-fragment'
 export default {
-  name: 'Dashboard',
-  components:{ Fragment },
-  props:{
+    name: 'Dashboard',
+    components:{ Fragment },
+    props:{
         route7: String,
         route8: String,
         route9: String,
         route10: String
-  }
+    },
+    computed:{
+        currentUser(){
+            return this.$store.state.auth.user
+        }
+    },
+    mounted(){
+        if(!this.currentUser){
+            this.$router.push('/login')
+        }
+    }
 }
 </script>
 
