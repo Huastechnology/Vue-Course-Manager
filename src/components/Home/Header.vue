@@ -1,6 +1,5 @@
 <template>
-    <header>
-        <div class="header2">
+        <header class="header2">
             <h1 class="text-tittle">Bienvenidos al gestor de cursos de A&A</h1> 
             <br/>
             <h2 class="text">Hacemos que la tarea aburrida se vuelva aprendizaje divertido</h2>
@@ -8,8 +7,7 @@
                 <img src="../img/tarea_facil.jpg" />
                 <img class="top" src="../img/mucha_tarea.jpeg" />
             </div>
-        </div>
-    </header>    
+        </header> 
 </template>
 <script>
 export default {
@@ -20,7 +18,7 @@ export default {
 .header2{
     background: #C7D7F2;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 4%;
     height: 650px;
     padding: 5%;
     border-radius: 2%;

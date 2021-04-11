@@ -1,29 +1,31 @@
 <template>
-<div>
-  <div class="contenedor">
-      <div class="title"> My Dashboard <img class="img-title" src="./img/dashboard.png" alt=""></div>
-      <div class="container">
-        <router-link to="/schedule" class="btn-area"> {{ route10 }} <br> <img class="uno" src="./img/calendario.png" alt=""> </router-link>
-        <router-link to="/students" class="btn-area2">{{ route7 }}<br> <img class="dos" src="./img/student.png" alt=""> </router-link>
-        <router-link to="/courses" class="btn-area3">{{ route8 }} <br> <img class="uno" src="./img/open-book.png" alt=""> </router-link>
-        <router-link to="/teachers" class="btn-area4">{{ route9 }} <br> <img class="uno" src="./img/presentation.png" alt=""> </router-link>
-      </div>
-  </div>
-  <div class="slider">
-        <ul>
-            <li><img class="sl" src="./img/uno.jpg" alt=""></li>
-            <li><img class="sl" src="./img/cuatro.jpg" alt=""></li>
-            <li><img class="sl" src="./img/dos.jpg" alt=""></li>
-            <li><img class="sl" src="./img/tres.png" alt=""></li>
-            
-        </ul>
-    </div>
-    </div>
+    <Fragment>
+        <div class="container_hero">
+            <div class="title"> My Dashboard <img class="img-title" src="./img/dashboard.png" alt=""></div>
+                <div class="container">
+                    <router-link to="/schedule" class="btn-area"> {{ route10 }} <br> <img class="uno" src="./img/calendario.png" alt=""> </router-link>
+                    <router-link to="/students" class="btn-area2">{{ route7 }}<br> <img class="dos" src="./img/student.png" alt=""> </router-link>
+                    <router-link to="/courses" class="btn-area3">{{ route8 }} <br> <img class="uno" src="./img/open-book.png" alt=""> </router-link>
+                    <router-link to="/teachers" class="btn-area4">{{ route9 }} <br> <img class="uno" src="./img/presentation.png" alt=""> </router-link>
+                </div>
+            </div>
+       <div class="slider">
+            <ul>
+                <li><img class="sl" src="./img/uno.jpg" alt=""></li>
+                <li><img class="sl" src="./img/cuatro.jpg" alt=""></li>
+                <li><img class="sl" src="./img/dos.jpg" alt=""></li>
+                <li><img class="sl" src="./img/tres.png" alt=""></li>
+                
+            </ul>
+       </div>
+    </Fragment>
 </template>
 
 <script>
+import { Fragment } from 'vue-fragment'
 export default {
   name: 'Dashboard',
+  components:{ Fragment },
   props:{
         route7: String,
         route8: String,
@@ -40,6 +42,16 @@ export default {
     padding: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+}
+.container_hero{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    background:rgb(176, 223, 231);
+    margin: 1.5%;
+    margin-top: 4%;
+    border-radius: 15px;
+    position:-webkit-sticky;
 }
 .title{
     background: rgb(176, 223, 231);
@@ -144,6 +156,7 @@ export default {
 .slider img{
 
     width: 80%;
+    border-radius: 20px;
 
 }
 
