@@ -9,9 +9,12 @@
                     <li> <router-link to="/dashboard" class="a">{{ route6 }}</router-link></li>
                 </ul>
             </nav>
-        <nav class="nav-button">
+        <nav class="nav-button" v-if="!currentUser">
             <router-link to="/login" class="btn-area">{{ route4 }}</router-link>
+        </nav>
+        <nav class="nav-button" v-if="currentUser">
             <router-link to="/signUp" class="btn-area">{{ route5 }}</router-link>
+            <router-link @click.prevent="logOut" class="btn-area">{{ route7 }}</router-link>
         </nav>
     </header>
 </template>
@@ -26,8 +29,20 @@ export default {
        route3: String,
        route4: String,
        route5: String,
-       route6: String
-   }
+       route6: String,
+       route7: String
+   },
+    computed:{
+        currentUser(){
+           return this.$store.state.auth.user
+        }
+    },
+    methods:{
+        logOut(){
+            this.$store.dispatch('auth/logout')
+            this.$router.push('/login')
+        }
+    }
 }
 </script>
 <style scoped>
