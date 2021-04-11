@@ -9,10 +9,10 @@ class AuthService {
             email: user.email,
             password: user.password
         }) .then(response => {
-            if(response.data.token){
-                localStorage.setItem('user', JSON.stringify(response.data))
-                localStorage.setItem('id', JSON.stringify(response.data.id))
-                localStorage.setItem('token', response.data.token)
+            if(response.data.message.token){
+                localStorage.setItem('user', JSON.stringify(response.data.email))
+                localStorage.setItem('rol', JSON.stringify(response.data.rol))
+                localStorage.setItem('token', response.data.message.token)
             }
             return response.data
         })
