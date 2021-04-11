@@ -16,5 +16,6 @@ export default {
   .cuadro{
     border-radius: 50px;
     margin: 30px;
+    margin-top: 4%;
   }
 </style>

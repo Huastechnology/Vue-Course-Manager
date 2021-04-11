@@ -59,10 +59,13 @@ export default {
     background-color: #000;
     margin-top: 5px;
     width: 95%;
-    height: 80px;
+    height: 60px;
     border-radius: 50px;
     margin-left: 2.5%;
-
+    left:0;           /* top left corner should start at leftmost spot */
+    top:0;            /* top left corner should start at topmost spot */
+    position: fixed;
+    z-index:200;
 }
 .logo{
     color:#fff;
@@ -92,7 +95,7 @@ export default {
     font-size: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 20px 30px;
+    padding: 10px 30px;
     border-radius: 5px;
     background: #d22938;
     margin-right: 20px;

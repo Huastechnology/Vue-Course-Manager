@@ -1,5 +1,5 @@
 <template>
-    <div class="seccion-servicios">
+    <section class="seccion-servicios">
         <div class="cuadro">
             <img class="img-cuadro" src="../img/cursos-en-linea-para-mejorar.jpg" alt="">
             <div class="cuadro-texto">
@@ -21,7 +21,7 @@
                 <h2 class="parrafo-cuadro">Todos los profesores estan perfectamente capacitados en la docencia infantil</h2>
             </div> 
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
