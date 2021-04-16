@@ -74,7 +74,7 @@ export default {
   },
   created() {
     if (!this.loggedIn) {
-      this.$router.push("/");
+      this.$router.push("/login");
     }
   },
   mounted(){
