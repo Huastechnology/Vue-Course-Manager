@@ -1,0 +1,127 @@
+<template>
+  <div class="cuadro">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="margin-left: 14%;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-uppercase mb-0">Manage Students</h5>
+            </div>
+            <div class="table-responsive">
+              <table class="table no-wrap user-table mb-0"> 
+                  <ul>
+                    <tr>
+                    <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Course</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Tutor Name</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Tutor Phone</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+                  </tr>
+                    <tr v-for="(student, index) in students" :key="index">
+                      <th> {{index}} </th>
+                      <td> {{student.name}}  </td> 
+                      <td> {{student.email}} </td> 
+                      <td> {{student.course}} </td> 
+                      <td> {{student.tutorName}} </td> 
+                      <td> {{student.tutorPhone}} </td>
+                      <td>
+                      <button
+                        type="button"
+                        class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                      >
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                      >
+                        <i class="fa fa-upload"></i>
+                      </button>
+                    </td>
+                    </tr>
+                  </ul>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+import StudentService from '../../services/student.service'
+
+export default {
+  name: "Student",
+
+  data: ()=> ({
+    students : []
+  }),
+  mounted(){
+      StudentService.getAll().then(Response=>{
+        this.students = Response.data.matchStudent
+      },
+      (error) => {
+            alert( 
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString())
+          })
+  },
+}
+</script>
+
+<style scoped>
+.cuadro {
+  padding: 10% 5%;
+}
+
+body{
+    background: #edf1f5;
+    margin-top:20px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+.btn-circle.btn-lg, .btn-group-lg>.btn-circle.btn {
+    width: 50px;
+    height: 50px;
+    padding: 14px 15px;
+    font-size: 18px;
+    line-height: 23px;
+}
+.text-muted {
+    color: #8898aa!important;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.btn-circle {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+.user-table tbody tr .category-select {
+    max-width: 150px;
+    border-radius: 20px;
+}
+</style>
