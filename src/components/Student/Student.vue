@@ -67,6 +67,16 @@ export default {
   data: ()=> ({
     students : []
   }),
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  created() {
+    if (!this.loggedIn) {
+      this.$router.push("/");
+    }
+  },
   mounted(){
       StudentService.getAll().then(Response=>{
         this.students = Response.data.matchStudent
