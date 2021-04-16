@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API_URL = `http://${process.env.VUE_APP_HOST}:${process.env.VUE_APP_PORT}/v2/`
-console.log(API_URL)
+
 
 class AuthService {
     login(user){
@@ -22,7 +22,7 @@ class AuthService {
         localStorage.removeItem('rol')
         localStorage.removeItem('token')
     }
-    register(user){
+    register(user){    
         const config = {
             headers: { 'Authorization': localStorage.getItem('token') }
         };
