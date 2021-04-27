@@ -4,32 +4,32 @@
 		<div class="login100-more" style="background-image: url('../img/Tarea.jpg');"></div>
       <img class="img-cuadro" src="../img/Tarea.jpg" alt="">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-				<form class="login100-form validate-form">
+				<form ref="form" class="login100-form validate-form" @submit.prevent="handleSignUp">
 					<span class="login100-form-title p-b-59">
 						Registro
 					</span>
 
 					<div class="wrap-input100 validate-input">
 						<span class="label-input100">Nombre completo</span>
-						<input class="input100" type="text" name="name" placeholder="Nombre">
+						<input class="input100" type="text" name="name" placeholder="Nombre" v-model="user.completeName">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input">
 						<span class="label-input100">Correo</span>
-						<input class="input100" type="text" name="email" placeholder="Correo">
+						<input class="input100" type="text" name="email" placeholder="Correo" v-model="user.email">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input">
 						<span class="label-input100">Teléfono</span>
-						<input class="input100" type="text" name="username" placeholder="Teléfono">
+						<input class="input100" type="text" name="username" placeholder="Teléfono" v-model="user.phone">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input">
 						<span class="label-input100">Contraseña</span>
-						<input class="input100" type="text" name="pass" placeholder="*************">
+						<input class="input100" type="text" name="pass" placeholder="*************" v-model="user.password">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -48,8 +48,40 @@
 </template>
 
 <script>
+import User from "../../models/user";
+
 export default {
-	name: 'Form'
+	name: 'Form',
+  data: () => ({
+    user: new User("", ""),
+  }),
+	methods: {
+		handleSignUp() {
+			this.$store.dispatch("auth/register", this.user).then(
+				() => {
+            this.$refs.form.reset()
+						this.user = new User()
+        },
+        err => {
+          alert( 
+            (err.response && err.response.data.message) ||
+            err.message ||
+            err.toString()
+					)
+        }
+			)
+		}
+	},
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  created() {
+    if (!this.loggedIn) {
+      this.$router.push("/login");
+    }
+  }
 }
 </script>
 
@@ -98,7 +130,7 @@ export default {
 
 	.limiter {
   width: 90%;
-	margin-top: 35px;
+	margin-top: 4%;
 	margin-left: 200px;
 	}
 
