@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     handleLogin(){
-      console.log("you have done click");
       if (this.user.email && this.user.password) {
         this.$store.dispatch("auth/login", this.user).then(
           () => {

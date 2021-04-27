@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = `http://localhost:5001/v2/`
+const API_URL = `http://${process.env.VUE_APP_HOST}:${process.env.VUE_APP_PORT}/v2/`
+
 
 class AuthService {
     login(user){
@@ -8,26 +9,29 @@ class AuthService {
             email: user.email,
             password: user.password
         }) .then(response => {
-            if(response.data.accessToken){
-                localStorage.setItem('user', JSON.stringify(response.data))
-                localStorage.setItem('id', JSON.stringify(response.data.id))
+            if(response.data.message.token){
+                localStorage.setItem('user', JSON.stringify(response.data.email))
+                localStorage.setItem('rol', JSON.stringify(response.data.rol))
+                localStorage.setItem('token', response.data.message.token)
             }
-
             return response.data
-
         })
     }
     logout(){
         localStorage.removeItem('user')
-        localStorage.removeItem('id')
+        localStorage.removeItem('rol')
+        localStorage.removeItem('token')
     }
-    register(user){
-        return axios.post(API_URL, 'user',{
+    register(user){    
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.post(API_URL + 'user',{
             completeName: user.completeName,
             phone: user.phone,
             email: user.email,
             password: user.password
-        })
+        }, config)
     }
 }
 
