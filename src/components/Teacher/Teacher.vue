@@ -77,14 +77,13 @@ export default {
   mounted(){
       TeacherService.getAll().then(Response=>{
         this.teachers = Response.data.msg
-        console.log(Response.data)
       },
       (error) => {
             alert( 
               (error.response && error.response.data) ||
               error.message ||
               error.toString())
-          })
+      })
   },
 }
 </script>
