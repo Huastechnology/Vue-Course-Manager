@@ -58,9 +58,10 @@ export default {
 	methods: {
 		handleSignUp() {
 			this.$store.dispatch("auth/register", this.user).then(
-				() => {
+				(data) => {
             this.$refs.form.reset()
 						this.user = new User()
+						alert(data.msg)
         },
         err => {
           alert( 
