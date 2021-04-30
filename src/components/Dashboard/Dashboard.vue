@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         currentAdminRol(){
-            if(this.$store.state.auth.user.rol === 'admin') {
+            if(this.$store.state.auth.user !== null && this.$store.state.auth.user.rol === 'admin') {
                 return true
             } else {
                 return false
