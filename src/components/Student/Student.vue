@@ -23,8 +23,9 @@
                       <th> {{index}} </th>
                       <td> {{student.name}}  </td> 
                       <td> {{student.email}} </td>
-                      <td  v-if="student.course.length === 0"> No hay cursos </td>
-                      <td v-for="(course, course_index) in student.course " :key="course_index"> {{course}} </td> 
+                      <!-- <td  v-if="student.course.length === 0"> No hay cursos </td> -->
+                      <!-- <td v-for="(course, course_index) in student.course " :key="course_index"> {{course}} </td> -->
+                      <td>{{student.course.courseName}}</td>
                       <td> {{student.tutorName}} </td> 
                       <td> {{student.tutorPhone}} </td>
                       <td>
