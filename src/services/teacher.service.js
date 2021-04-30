@@ -8,7 +8,6 @@ class TeacherService {
         const config = {
             headers: { 'Authorization': localStorage.getItem('token') }
         };
-        console.log(API_URL)
         return axios.get(API_URL + 'user/', config)
     }
 }
