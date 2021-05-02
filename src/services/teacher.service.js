@@ -10,6 +10,12 @@ class TeacherService {
         };
         return axios.get(API_URL + 'user/', config)
     }
+    get(user){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.get(API_URL + 'user/' + user, config)
+    }
 }
 
 export default new TeacherService()
