@@ -20,7 +20,7 @@
                     <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
                   </tr>
                     <tr v-for="(student, index) in students" :key="index">
-                      <th> {{index}} </th>
+                      <th> {{index + 1 }} </th>
                       <td> {{student.name}}  </td> 
                       <td> {{student.email}} </td>
                       <!-- <td  v-if="student.course.length === 0"> No hay cursos </td> -->
@@ -66,6 +66,7 @@ import StudentService from '../../services/student.service'
 export default {
   name: "Student",
 
+
   data: ()=> ({
     students : []
   }),
@@ -95,7 +96,7 @@ export default {
 
 <style scoped>
 .cuadro {
-  padding: 10% 5%;
+  padding: 0% 5%;
 }
 
 body{
