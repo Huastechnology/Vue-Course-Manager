@@ -20,31 +20,38 @@
           />
         </div>
         <div class="input-field second-wrap">
-          <button class="btn-search" type="button" @click="search">Buscar</button>
+          <button class="btn-search" type="button" @click="Search">Buscar</button>
         </div>
       </div>
-      <div class="cuadro" v-if="userresponse != null">
+      <div class="cuadro">
         <div class="container">
           <div class="row">
-            <div class="col-md-12" style="margin-left: 14%;">
+            <div class="col-md-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title text-uppercase mb-0">Manage Teachers</h5>
+                  <h5 class="card-title text-uppercase mb-0"> Gestionar {{title}} </h5>
                 </div>
                 <div class="table-responsive">
                   <table class="table no-wrap user-table mb-0">
                     <ul>
                       <tr>
-                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
-                        <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
-                        <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
-                        <th scope="col" class="border-0 text-uppercase font-medium">Phone</th>
+                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">{{colum}}</th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">{{colum2}}</th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">{{colum3}}</th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">{{colum4}}</th>
+                        <th v-if="type !== 'teacher'" scope="col" class="border-0 text-uppercase font-medium">{{colum6}}</th>
+                        <th  v-if="type !== 'teacher'" scope="col" class="border-0 text-uppercase font-medium">{{colum7}}</th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">{{colum5}}</th>
                       </tr>
                       <tr v-for="(useresponse, index) in userresponse" :key="index">
                         <th>{{index + 1 }}</th>
-                        <td>{{useresponse.completeName}}</td>
+                        <td v-if="type !== 'student'">{{useresponse.completeName}}</td>
+                        <td v-if="type !== 'teacher'">{{useresponse.name}}</td>
                         <td>{{useresponse.email}}</td>
-                        <td>{{useresponse.phone}}</td>
+                        <td v-if="type !== 'student'">{{useresponse.phone}}</td>
+                        <td v-if="type !== 'teacher'">{{useresponse.course.courseName}}</td>
+                        <td v-if="type !== 'teacher'">{{useresponse.tutorName}}</td>
+                        <td v-if="type !== 'teacher'">{{useresponse.tutorPhone}}</td>
                         <td>
                           <button
                             type="button"
@@ -80,9 +87,22 @@
 
 <script>
 import TeacherService from "../../services/teacher.service";
+import StudentService from '../../services/student.service';
 
 export default {
   name: "Searchbar",
+  props:{
+       title: String,
+       colum: String,
+       colum2: String,
+       colum3: String,
+       colum4: String,
+       colum5: String,
+       colum6: String,
+       colum7: String,
+       type: String,
+       array: [], 
+   },
   data: () => ({
     user: "",
     userresponse: []
@@ -98,14 +118,11 @@ export default {
     }
   },
   methods: {
-    search() {
-      console.log(this.user);
+    searchTeacher() {
       TeacherService.get(this.user).then(
         response => {
-          console.log(response);
           this.user = Response.matchUser
           this.userresponse = response.data.matchuser
-          console.log(response.data)
         },
         error => {
           alert(
@@ -115,6 +132,28 @@ export default {
           );
         }
       );
+    },
+    searchStudent() {
+      StudentService.get(this.user).then(
+        response => {
+          this.user = Response.matchStudent
+          this.userresponse = response.data.matchStudent
+        },
+        error => {
+          alert(
+            (error.response && error.response.data) ||
+              error.message ||
+              error.toString()
+          );
+        }
+      );
+    },
+    Search(){
+      if(this.type === "teacher"){
+        this.searchTeacher()
+      } else {
+        this.searchStudent()
+      }
     }
   }
 };
@@ -141,12 +180,12 @@ svg:not(:root) {
   background-position: bottom right;
   background-repeat: no-repeat;
   background-size: 0%;
-  padding: 5px;
+  padding: 0px;
 }
 
 .s130 form {
-  width: 50%;
-  max-width: 790px;
+  width: 100%;
+  max-width: 1300px;
   padding-top: 24vh;
 }
 
@@ -293,4 +332,49 @@ svg:not(:root) {
 .s130 form .inner-form .input-field.second-wrap .btn-search {
   font-size: 13px;
 }
+
+.cuadro {
+  padding: 0% 5%;
+
+}
+
+body{
+    background: #edf1f5;
+    margin-top:20px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+.btn-circle.btn-lg, .btn-group-lg>.btn-circle.btn {
+    width: 50px;
+    height: 50px;
+    padding: 14px 15px;
+    font-size: 18px;
+    line-height: 23px;
+}
+.text-muted {
+    color: #8898aa!important;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.btn-circle {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+.user-table tbody tr .category-select {
+    max-width: 150px;
+    border-radius: 20px;
+}
+
 </style>
