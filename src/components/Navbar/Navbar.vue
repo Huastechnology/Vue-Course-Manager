@@ -15,7 +15,7 @@
         <nav class="nav-button" v-if="currentUser">
             <router-link to="/signUp" v-if="currentUser.rol == 'admin'" class="btn-area">{{ route5 }}</router-link>
             <b-button @click.prevent="logOut" class="btn-area" id="cerrar">
-                <b-icon icon="box-arrow-in-right" aria-hidden="true"></b-icon>Cerrar Sesion
+                Cerrar Sesion
             </b-button>
         </nav>
     </header>
