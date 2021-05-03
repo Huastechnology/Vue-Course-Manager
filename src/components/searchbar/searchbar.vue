@@ -335,7 +335,7 @@ svg:not(:root) {
 
 .cuadro {
   padding: 0% 5%;
-
+  align-items: center;
 }
 
 body{
