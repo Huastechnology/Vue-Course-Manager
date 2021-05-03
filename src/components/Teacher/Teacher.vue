@@ -2,7 +2,7 @@
   <div class="cuadro">
     <div class="container">
       <div class="row">
-        <div class="col-md-12" style="margin-left: 14%;">
+        <div class="col-md-12">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title text-uppercase mb-0">Manage Teachers</h5>
@@ -18,7 +18,7 @@
                     
                   </tr>
                     <tr v-for="(teacher, index) in teachers" :key="index">
-                      <th> {{index}} </th>
+                      <th> {{index + 1}} </th>
                       <td> {{teacher.completeName}}  </td> 
                       <td> {{teacher.email}} </td> 
                       <td> {{teacher.phone}} </td> 
@@ -90,7 +90,7 @@ export default {
 
 <style scoped>
 .cuadro {
-  padding: 10% 5%;
+  padding: 0% 20%;
 }
 
 body{
