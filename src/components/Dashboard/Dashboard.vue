@@ -5,7 +5,7 @@
                 <div class="container">
                     <router-link to="/schedule" class="btn-area"> {{ route10 }} <br> <img class="uno" src="./img/calendario.png" alt=""> </router-link>
                     <router-link to="/students" v-if="currentAdminRol()" class="btn-area2">{{ route7 }}<br> <img class="dos" src="./img/student.png" alt=""> </router-link>
-                    <router-link to="/courses" v-if="currentAdminRol()" class="btn-area3">{{ route8 }} <br> <img class="uno" src="./img/open-book.png" alt=""> </router-link>
+                    <router-link to="/courses" class="btn-area3">{{ route8 }} <br> <img class="uno" src="./img/open-book.png" alt=""> </router-link>
                     <router-link to="/teachers" v-if="currentAdminRol()" class="btn-area4">{{ route9 }} <br> <img class="uno" src="./img/presentation.png" alt=""> </router-link>
                 </div>
             </div>
