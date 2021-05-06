@@ -44,7 +44,7 @@ export default {
 
 .footer-clean{
     background: black;
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     bottom: 0%;
 }
