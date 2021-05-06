@@ -7,7 +7,7 @@
             <div class="card-body">
               <h5 class="card-title text-uppercase mb-0">Manage courses</h5>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive table-div">
               <table class="table no-wrap user-table mb-0"> 
                   <ul>
                     <tr>
@@ -141,5 +141,9 @@ body{
 .user-table tbody tr .category-select {
     max-width: 150px;
     border-radius: 20px;
+}
+.table-div {
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 </style>
