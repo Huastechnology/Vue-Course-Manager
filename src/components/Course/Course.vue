@@ -84,7 +84,6 @@ export default {
             }
           }
         } else {
-          console.log(Response.data.matchCourse)
           this.courses = Response.data.matchCourse
         }
       },
