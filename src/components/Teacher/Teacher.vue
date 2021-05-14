@@ -38,6 +38,7 @@
                         <button
                           class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
                           id="show-btn"
+                          v-on:click="getId(teacher._id)"
                           @click="$bvModal.show('bv-modal-example')"
                         >
                           <i class="fa fa-trash"></i>
@@ -66,7 +67,7 @@
                               class="mt-3"
                               variant="success"
                               block
-                              @click="deleteTeacher(teacher._id)"
+                              @click="deleteTeacher()"
                               v-on:click="$bvModal.hide('bv-modal-example')"
                               >Confirmar</b-button
                             >
@@ -100,7 +101,8 @@ export default {
   name: "Teacher",
   data: () => ({
     teachers: [],
-    activator: true
+    activator: true,
+    teacher_id: ''
   }),
   computed: {
     loggedIn() {
@@ -127,9 +129,11 @@ export default {
     );
   },
   methods: {
-    deleteTeacher(id){
-      TeacherService.deleteTeacher(id).then(response =>{
-        console.log(response)
+    getId(id) {
+      this.teacher_id = id
+    },
+    deleteTeacher(){
+      TeacherService.deleteTeacher(this.teacher_id).then(response =>{
         alert(response.data.msg)
       })
     }
