@@ -11,13 +11,16 @@
             <input class="login" type="password" name="password" v-model="user.password" placeholder="Password">
             <button class="boton" type="submit">Login</button>
         </form>
+        <particles-bg type="polygon" :num="20" :bg="true"/>
     </div>
 </template>
 
 <script>
 import User from "../../models/user";
+import { ParticlesBg } from "particles-bg-vue";
 export default {
   name: "FormIn",
+   components:{ParticlesBg},
   data: () => ({
     user: new User("", ""),
   }),
