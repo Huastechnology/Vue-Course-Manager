@@ -33,7 +33,7 @@ export default {
 <style scoped>
 .seccion-servicios{
     padding: 40px 40px;
-    background: #ffffff;
+    background: #fdadad85;
 
 }
 .cuadro{
