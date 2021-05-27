@@ -81,13 +81,38 @@
                               <i class="fas fa-check-circle"></i>
                             </button>
                         </span>
-                        <span v-else>
-                           <button
+                          <span v-else>
+                            <button
                               type="button"
-                              class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"                              
+                              class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                              v-on:click="getId(student._id)"
+                              @click=" $bvModal.show('bv-modal-example')"
                             >
-                              <i class="fa fa-trash"></i>
+                              <i class="fa fa-trash" />
                             </button>
+                            <b-modal id="bv-modal-example" hide-footer>
+                              <template #modal-title> {{mainTitle}} </template>
+                              <div class="d-block text-center">
+                                <h3>{{msgconfirm}}</h3>
+                              </div>
+                              <b-button
+                                class="mt-3"
+                                variant="success"
+                                block
+                                @click="deleteStudent()"
+                                v-on:click="$bvModal.hide('bv-modal-example')"
+                              >
+                                Confirmar
+                              </b-button>
+                              <b-button
+                                class="mt-3"
+                                variant="danger"
+                                block
+                                @click="$bvModal.hide('bv-modal-example')"
+                              >
+                                Cancelar
+                              </b-button>
+                            </b-modal>
                         </span>  
                         <span v-if="actualizar && actualizarid == index+1">
                           <button
@@ -106,18 +131,7 @@
                             >
                               <i class="fa fa-edit"></i>
                             </button>
-                        </span>   
-                        <span v-if="actualizar && actualizarid == index+1">
-                          
-                        </span>
-                        <span v-else>
-                           <button
-                              type="button"
-                              class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"                              
-                            >
-                              <i class="fa fa-upload"></i>
-                            </button>
-                        </span>                       
+                        </span>                         
                     </td>
                     </tr>
                   </ul>
@@ -137,14 +151,19 @@ import CourseService from '../../services/course.service'
 import Addnew from './addStudent.vue'
 export default {
   name: "Student",
-components:{Addnew},
+  components:{Addnew},
+  props:{
+    msgconfirm: String,
+    mainTitle: String
+  },
   data: ()=> ({
     students : [],
     courses: [],
     course: '',
     actualizar: false,
     actualizarid: -1,
-    selected: {}
+    selected: {},
+    studentId:''
   }),
   computed: {
     loggedIn() {
@@ -186,6 +205,16 @@ components:{Addnew},
           });
   },
   methods: {
+    getId(id){
+      this.studentId = id
+    },
+    deleteStudent(){
+      StudentService.delete(this.studentId).then( response => {
+        alert(response.data.message)
+      }, error => {
+        alert(error.response.data.message)
+      })
+    },
     updateStudent (id){
       this.actualizarid = id
       this.actualizar = true;

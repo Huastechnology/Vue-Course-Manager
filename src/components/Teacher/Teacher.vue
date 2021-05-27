@@ -192,6 +192,8 @@ export default {
     deleteTeacher() {
       TeacherService.deleteTeacher(this.teacher_id).then((response) => {
         alert(response.data.msg);
+      }, error => {
+        alert(error.response.data.msg)
       });
     },
   },
