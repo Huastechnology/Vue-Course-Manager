@@ -18,7 +18,7 @@
                 
             </ul>
        </div>
-       <particles-bg type="fountain" :canvas="{backgroundColor:'#888'}"  :num="20" :bg="true"/>
+       <particles-bg type="cobweb"  :num="50" :bg="true"/>
     </Fragment>
 </template>
 
@@ -61,14 +61,13 @@ export default {
      
     margin: 0;
     padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
 }
 .container_hero{
     justify-content: center;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to right, rgb(247, 119, 119), rgba(87, 134, 236, 0.822));
+    backdrop-filter: saturate(180%)blur(20px);
+    background-color: rgba(0, 0, 0, 0.123);
     margin: 1.5%;
     margin-top: 4%;
     border-radius: 15px;
