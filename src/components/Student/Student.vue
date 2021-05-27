@@ -5,6 +5,7 @@
         <div class="col-md-12" style="margin-left: 14%;">
           <div class="card">
             <div class="card-body">
+              <Addnew/>
               <h5 class="card-title text-uppercase mb-0">Manage Students</h5>
             </div>
             <div class="table-responsive">
@@ -133,10 +134,10 @@
 
 import StudentService from '../../services/student.service'
 import CourseService from '../../services/course.service'
-
+import Addnew from './addStudent.vue'
 export default {
   name: "Student",
-
+components:{Addnew},
   data: ()=> ({
     students : [],
     courses: [],
