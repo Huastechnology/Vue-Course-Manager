@@ -33,16 +33,17 @@ export default {
 <style scoped>
 .seccion-servicios{
     padding: 40px 40px;
-    background: #fdadad85;
-
+    
 }
 .cuadro{
     display: flex;
     align-items: center;
     text-transform: uppercase;
+    border-radius: 20px;
 }
 .img-cuadro{
-    width: 50%;
+    width: 40%;
+    border-radius: 20px;
 }
 .cuadro:nth-child(2n){
     flex-direction: row-reverse;
