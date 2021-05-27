@@ -29,7 +29,7 @@
 
 					<div class="wrap-input100 validate-input">
 						<span class="label-input100">Contraseña</span>
-						<input class="input100" type="text" name="pass" placeholder="*************" v-model="user.password">
+						<input class="input100" type="password" name="pass"  v-model="user.password">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -91,7 +91,7 @@ export default {
     width: 50%;
 		height: 50%;
 		margin: 20px;
-		border-radius: 200px;
+		border-radius: 40px;
 	}
 	input {
 		outline: none;
@@ -131,7 +131,7 @@ export default {
 
 	.limiter {
   width: 90%;
-	margin-top: 4%;
+	margin-top: 6%;
 	margin-left: 200px;
 	}
 
@@ -256,6 +256,9 @@ export default {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		border-radius: 30px;
+		background-color: #000;
+		color: #fff;
 		padding: 0 20px;
 		min-width: 244px;
 		height: 50px;
