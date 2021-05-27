@@ -29,32 +29,74 @@
                   </tr>
                   <tr v-for="(teacher, index) in teachers" :key="index">
                     <th>{{ index + 1 }}</th>
-                    <td>{{ teacher.completeName }}</td>
-                    <td>{{ teacher.email }}</td>
-                    <td>{{ teacher.phone }}</td>
+                    <td>
+                      <span v-if="update && updateid == index + 1">
+                        <input
+                          v-model="teacher.completeName"
+                          class="form-control"
+                        />
+                      </span>
+                      <span v-else>
+                        {{ teacher.completeName }}
+                      </span>
+                    </td>
+                    <td>
+                      <span v-if="update && updateid == index + 1">
+                        <input v-model="teacher.email" class="form-control" />
+                      </span>
+                      <span v-else>
+                        {{ teacher.email }}
+                      </span>
+                    </td>
+                    <td>
+                      <span v-if="update && updateid == index + 1">
+                        <input v-model="teacher.phone" class="form-control" />
+                      </span>
+                      <span v-else>
+                        {{ teacher.phone }}
+                      </span>
+                    </td>
 
                     <td>
                       <div>
-                        <button
-                          class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                          id="show-btn"
-                          v-on:click="getId(teacher._id)"
-                          @click="$bvModal.show('bv-modal-example')"
-                        >
-                          <i class="fa fa-trash"></i>
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                        >
-                          <i class="fa fa-edit"></i>
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                        >
-                          <i class="fa fa-upload"></i>
-                        </button>
+                        <span v-if="update && updateid == index + 1">
+                          <button
+                            type="button"
+                            class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                            @click="updateTeacher(teacher,teacher._id)"
+                          >
+                            <i class="fa fa-check-circle"></i>
+                          </button>
+                        </span>
+                        <span v-else>
+                          <button
+                            class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                            id="show-btn"
+                            v-on:click="getId(teacher._id)"
+                            @click="$bvModal.show('bv-modal-example')"
+                          >
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </span>
+                        <span v-if="update && updateid == index + 1">
+                          <button
+                            type="button"
+                            class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                            @click="update=false"
+                          >
+                            <i class="fa fa-ban"></i>
+                          </button>
+                        </span>
+                        <span v-else>
+                          <button
+                            type="button"
+                            class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                            @click="editTeacher(index+1)"
+                          >
+                            <i class="fa fa-edit"></i>
+                          </button>
+                        </span>
+
                         <div>
                           <b-modal id="bv-modal-example" hide-footer>
                             <template #modal-title>
@@ -96,13 +138,14 @@
 <script>
 import TeacherService from "../../services/teacher.service";
 
-
 export default {
   name: "Teacher",
   data: () => ({
     teachers: [],
     activator: true,
-    teacher_id: ''
+    teacher_id: "",
+    update: false,
+    updateid: -1,
   }),
   computed: {
     loggedIn() {
@@ -129,15 +172,29 @@ export default {
     );
   },
   methods: {
-    getId(id) {
-      this.teacher_id = id
+    editTeacher(id){
+      this.updateid = id
+      this.update= true;
     },
-    deleteTeacher(){
-      TeacherService.deleteTeacher(this.teacher_id).then(response =>{
-        alert(response.data.msg)
+    updateTeacher(user,id){
+      TeacherService.update(user, id).then(Response => {
+        alert(Response.data.msg)
+        this.update = false
+      },(error)=>{
+        alert(error.response.data.message)
       })
-    }
-  }
+
+    },
+
+    getId(id) {
+      this.teacher_id = id;
+    },
+    deleteTeacher() {
+      TeacherService.deleteTeacher(this.teacher_id).then((response) => {
+        alert(response.data.msg);
+      });
+    },
+  },
 };
 </script>
 
