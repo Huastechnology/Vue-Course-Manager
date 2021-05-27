@@ -11,7 +11,7 @@
             <input class="login" type="password" name="password" v-model="user.password" placeholder="Password">
             <button class="boton" type="submit">Login</button>
         </form>
-        <particles-bg type="polygon" :num="20" :bg="true"/>
+        <particles-bg type="cobweb" :num="40" :bg="true"/>
     </div>
 </template>
 
