@@ -18,14 +18,16 @@
                 
             </ul>
        </div>
+       <particles-bg type="cobweb"  :num="50" :bg="true"/>
     </Fragment>
 </template>
 
 <script>
 import { Fragment } from 'vue-fragment'
+import { ParticlesBg } from "particles-bg-vue";
 export default {
     name: 'Dashboard',
-    components:{ Fragment },
+    components:{ Fragment ,ParticlesBg},
     props:{
         route7: String,
         route8: String,
@@ -59,21 +61,20 @@ export default {
      
     margin: 0;
     padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
 }
 .container_hero{
     justify-content: center;
     display: flex;
     flex-direction: column;
-    background:rgb(176, 223, 231);
+    backdrop-filter: saturate(180%)blur(20px);
+    background-color: rgba(0, 0, 0, 0.123);
     margin: 1.5%;
     margin-top: 4%;
     border-radius: 15px;
     position:-webkit-sticky;
 }
 .title{
-    background: rgb(176, 223, 231);
+   background:rgba(146, 209, 240, 0);
     margin-left: 8%;
     width: 84%;
     margin-top: 40px;
@@ -89,7 +90,7 @@ export default {
 .container{
     width: 84%;
     height: 160px;
-    background: rgb(176, 223, 231);
+   background:rgba(146, 209, 240, 0);
     display: flex;
     justify-content: center;
     margin-left: 8%;
@@ -155,7 +156,7 @@ export default {
 .slider{
     
     text-align: center;
-    width: 95%;
+    width: 42%;
     margin: auto;
     overflow: hidden;
     margin-top: 10px;

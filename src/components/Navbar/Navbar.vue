@@ -56,8 +56,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    background-color: #000;
+    backdrop-filter: saturate(180%)blur(20px);
+    background: rgba(0, 0, 0, 0.671);
+    border-bottom: 1px solid rgba(255, 237, 237, 0.692);
+    color: #00000034;
     margin-top: 5px;
     width: 95%;
     height: 60px;
