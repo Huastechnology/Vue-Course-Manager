@@ -131,18 +131,7 @@
                             >
                               <i class="fa fa-edit"></i>
                             </button>
-                        </span>   
-                        <span v-if="actualizar && actualizarid == index+1">
-                          
-                        </span>
-                        <span v-else>
-                           <button
-                              type="button"
-                              class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"                              
-                            >
-                              <i class="fa fa-upload"></i>
-                            </button>
-                        </span>                       
+                        </span>                         
                     </td>
                     </tr>
                   </ul>
