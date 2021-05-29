@@ -26,8 +26,10 @@
                       <td v-for="(course_schedule, course_index) in course.schedule" :key="course_index"> {{course_schedule}} </td>
                       <td>
                       <button
-                        type="button"
                         class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                        id="show-btn"
+                        v-on:click="getId(course._id)"
+                        @click="$bvModal.show('bv-modal-example')"
                       >
                         <i class="fa fa-trash"></i>
                       </button>
@@ -43,7 +45,33 @@
                       >
                         <i class="fa fa-upload"></i>
                       </button>
-                    </td>
+
+                      <div>
+                        <b-modal id="bv-modal-example" hide-footer>
+                            <template #modal-title>
+                              Eliminar el curso
+                            </template>
+                            <div class="d-block text-center">
+                              <h3>¿Deseas Eliminar el curso?</h3>
+                            </div>
+                            <b-button
+                              class="mt-3"
+                              variant="success"
+                              block
+                              @click="deleteCourse()"
+                              v-on:click="$bvModal.hide('bv-modal-example')"
+                              >Confirmar</b-button
+                            >
+                            <b-button
+                              class="mt-3"
+                              variant="danger"
+                              block
+                              @click="$bvModal.hide('bv-modal-example')"
+                              >Cancelar</b-button
+                            >
+                          </b-modal>
+                        </div>
+                      </td>
                     </tr>
                   </ul>
               </table>
@@ -63,7 +91,8 @@ export default {
   
   data: ()=> ({
     course: '',
-    courses : []
+    courses : [],
+    course_id: '',
   }),
   computed: {
     loggedIn() {
@@ -94,6 +123,19 @@ export default {
               error.toString())
           })
   },
+  methods: {
+    getId(id) {
+      this.course_id = id
+    },
+    deleteCourse() {
+      CourseService.deleteCourse(this.course_id)
+        .then((response) => {
+          console.log(response.data.message)
+        }, error => {
+          console.log(error.response.data.message)
+        })
+    }
+  }
 }
 </script>
 
