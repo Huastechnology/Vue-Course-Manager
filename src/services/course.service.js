@@ -10,6 +10,12 @@ class CourseService {
         };
         return axios.get(API_URL + 'course/' + course, config)
     }
+    deleteCourse(id){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.delete(API_URL + 'course/' + id, config)
+    }
 }
 
 export default new CourseService()
