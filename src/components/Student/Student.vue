@@ -183,7 +183,7 @@ export default {
             this.$swal("Error!",
               (error.response && error.response.data) ||
               error.message ||
-              error.toString())
+              error.toString(), 'error')
           })
 
       CourseService.getCourse(this.course).then(Response=>{
@@ -201,7 +201,7 @@ export default {
             this.$swal("Error!", 
               (error.response && error.response.data) ||
               error.message ||
-              error.toString())
+              error.toString(), 'error')
           });
   },
   methods: {
@@ -210,9 +210,9 @@ export default {
     },
     deleteStudent(){
       StudentService.delete(this.studentId).then( response => {
-        this.$swal("Successfully!", response.data.message)
+        this.$swal("Successfully!", response.data.message, 'success')
       }, error => {
-        this.$swal("Error!", error.response.data.message)
+        this.$swal("Error!", error.response.data.message, 'error')
       })
     },
     updateStudent (id){
@@ -222,12 +222,12 @@ export default {
     updatingStudent(user,id){
       user.course = this.selected
       StudentService.update(user, id).then(Response => {        
-        this.$swal("Successfully!", Response.data.msg)
+        this.$swal("Successfully!", Response.data.msg, 'success')
         this.actualizar = false
       },(error)=> {
         this.$swal("Error!", (error.response && error.response.data) ||
           error.message ||
-          error.toString())
+          error.toString(), 'error')
       })
     }
   }
