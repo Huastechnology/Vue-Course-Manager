@@ -61,17 +61,13 @@ export default {
 				(data) => {
             this.$refs.form.reset()
 						this.user = new User()
-						alert(data.msg)
+						this.$swal("Successfully!", data.msg)
         },
         err => {
-          alert( 
-            (err.response && err.response.data.message) ||
+			this.$swal("Error!", (err.response && err.response.data.message) ||
             err.message ||
-            err.toString()
-					)
-        }
-			)
-		}
+            err.toString())
+        })}
 	},
   computed: {
     loggedIn() {
