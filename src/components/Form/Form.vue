@@ -66,7 +66,7 @@ export default {
         err => {
 			this.$swal("Error!", (err.response && err.response.data.message) ||
             err.message ||
-            err.toString())
+            err.toString(), 'error')
         })}
 	},
   computed: {
