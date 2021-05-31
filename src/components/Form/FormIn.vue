@@ -44,7 +44,7 @@ export default {
           (error) => {
             this.$swal("Error!", (error.response && error.response.data) ||
               error.message ||
-              error.toString())
+              error.toString(), 'error')
           }
         );
       }
