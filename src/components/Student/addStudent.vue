@@ -75,7 +75,7 @@ export default {
         this.$swal("Error!",
           (error.response && error.response.data) ||
             error.message ||
-            error.toString()
+            error.toString(), 'error'
         );
       }
     );
@@ -90,12 +90,12 @@ export default {
     handleSubmit() {
       // Push the name to submitted names
       StudentService.create(this.student).then(Response =>{
-        this.$swal("Successfully!", Response.data.msg)
+        this.$swal("Successfully!", Response.data.msg, 'success')
       },(error) => {
             this.$swal("Error!", 
               (error.response && error.response.data) ||
               error.message ||
-              error.toString())
+              error.toString(), 'error')
           })
       // Hide the modal manually
       this.$nextTick(() => {
