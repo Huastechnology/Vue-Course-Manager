@@ -120,7 +120,7 @@ export default {
             this.$swal("Error!", 
               (error.response && error.response.data) ||
               error.message ||
-              error.toString())
+              error.toString(), 'error')
           })
   },
   methods: {
@@ -130,9 +130,9 @@ export default {
     deleteCourse() {
       CourseService.deleteCourse(this.course_id)
         .then((response) => {
-          this.$swal("Successfully!",response.data.message)
+          this.$swal("Successfully!",response.data.message, 'success')
         }, error => {
-          this.$swal("Error!", error.response.data.message)
+          this.$swal("Error!", error.response.data.message, 'error')
         })
     }
   }
