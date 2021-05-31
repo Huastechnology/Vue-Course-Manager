@@ -42,8 +42,7 @@ export default {
             this.$router.push("/");
           },
           (error) => {
-            alert( 
-              (error.response && error.response.data) ||
+            this.$swal("Error!", (error.response && error.response.data) ||
               error.message ||
               error.toString())
           }
