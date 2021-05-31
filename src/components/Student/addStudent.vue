@@ -65,7 +65,6 @@ export default {
               this.$store.state.auth.user.email
             ) {
               this.courses.push(Response.data.matchCourse[i]);
-              console.log(Response.data)
             }
           }
         } else {
@@ -73,7 +72,7 @@ export default {
         }
       },
       (error) => {
-        alert(
+        this.$swal("Error!",
           (error.response && error.response.data) ||
             error.message ||
             error.toString()
@@ -91,9 +90,9 @@ export default {
     handleSubmit() {
       // Push the name to submitted names
       StudentService.create(this.student).then(Response =>{
-           alert(Response.data.msg)
+        this.$swal("Successfully!", Response.data.msg)
       },(error) => {
-            alert( 
+            this.$swal("Error!", 
               (error.response && error.response.data) ||
               error.message ||
               error.toString())
