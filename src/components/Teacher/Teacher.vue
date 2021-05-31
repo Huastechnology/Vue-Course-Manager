@@ -163,11 +163,7 @@ export default {
         this.teachers = Response.data.msg;
       },
       (error) => {
-        alert(
-          (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        );
+        this.$swal("Error!", (error.response && error.response.data) || error.message || error.toString())
       }
     );
   },
@@ -178,10 +174,10 @@ export default {
     },
     updateTeacher(user,id){
       TeacherService.update(user, id).then(Response => {
-        alert(Response.data.msg)
+        this.$swal("Successfully!", Response.data.msg)
         this.update = false
       },(error)=>{
-        alert(error.response.data.message)
+        this.$swal("Error!", error.response.data.message)
       })
 
     },
@@ -191,9 +187,9 @@ export default {
     },
     deleteTeacher() {
       TeacherService.deleteTeacher(this.teacher_id).then((response) => {
-        alert(response.data.msg);
+        this.$swal("Successfully!", response.data.msg)
       }, error => {
-        alert(error.response.data.msg)
+        this.$swal("Error!", error.response.data.msg)
       });
     },
   },
