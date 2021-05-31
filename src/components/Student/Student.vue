@@ -180,7 +180,7 @@ export default {
         this.students = Response.data.matchStudent
       },
       (error) => {
-            alert( 
+            this.$swal("Error!",
               (error.response && error.response.data) ||
               error.message ||
               error.toString())
@@ -198,7 +198,7 @@ export default {
         }
       },
       (error) => {
-            alert( 
+            this.$swal("Error!", 
               (error.response && error.response.data) ||
               error.message ||
               error.toString())
@@ -210,9 +210,9 @@ export default {
     },
     deleteStudent(){
       StudentService.delete(this.studentId).then( response => {
-        alert(response.data.message)
+        this.$swal("Successfully!", response.data.message)
       }, error => {
-        alert(error.response.data.message)
+        this.$swal("Error!", error.response.data.message)
       })
     },
     updateStudent (id){
@@ -222,12 +222,12 @@ export default {
     updatingStudent(user,id){
       user.course = this.selected
       StudentService.update(user, id).then(Response => {        
-        alert(Response.data.msg)
+        this.$swal("Successfully!", Response.data.msg)
         this.actualizar = false
       },(error)=> {
-        (error.response && error.response.data) ||
-        error.message ||
-        error.toString()
+        this.$swal("Error!", (error.response && error.response.data) ||
+          error.message ||
+          error.toString())
       })
     }
   }
