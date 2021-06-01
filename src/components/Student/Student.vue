@@ -22,6 +22,7 @@
                   </tr>
                     <tr v-for="(student, index) in students" :key="index">
                       <th> {{index + 1 }} </th>
+                      <!-- <td>{{student.name}}</td> -->
                       <td> <!-- {{student.name}} -->  
                         <span v-if="actualizar && actualizarid == index+1">
                           <input v-model="student.name" class="form-control">
@@ -177,7 +178,15 @@ export default {
   },
   mounted(){
       StudentService.getAll().then(Response=>{
-        this.students = Response.data.matchStudent
+        if(this.$store.state.auth.user.rol === 'teacher') {
+          for(let i = 0; i < Response.data.matchStudent.length; i++) {
+            if(Response.data.matchStudent[i].course.teacher.email === this.$store.state.auth.user.email) {
+              this.students.push(Response.data.matchStudent[i])
+            }
+          }
+        } else {
+          this.students = Response.data.matchStudent
+        }
       },
       (error) => {
             this.$swal("Error!",
