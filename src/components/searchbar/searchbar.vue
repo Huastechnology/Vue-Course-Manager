@@ -125,11 +125,9 @@ export default {
           this.userresponse = response.data.matchuser
         },
         error => {
-          alert(
-            (error.response && error.response.data) ||
-              error.message ||
-              error.toString()
-          );
+          this.$swal("Error!", (error.response && error.response.data) ||
+            error.message ||
+            error.toString(), 'error')
         }
       );
     },
@@ -140,10 +138,10 @@ export default {
           this.userresponse = response.data.matchStudent
         },
         error => {
-          alert(
+          this.$swal("Error!",
             (error.response && error.response.data) ||
               error.message ||
-              error.toString()
+              error.toString(), 'error'
           );
         }
       );

@@ -117,10 +117,10 @@ export default {
         }
       },
       (error) => {
-            alert( 
+            this.$swal("Error!", 
               (error.response && error.response.data) ||
               error.message ||
-              error.toString())
+              error.toString(), 'error')
           })
   },
   methods: {
@@ -130,9 +130,9 @@ export default {
     deleteCourse() {
       CourseService.deleteCourse(this.course_id)
         .then((response) => {
-          console.log(response.data.message)
+          this.$swal("Successfully!",response.data.message, 'success')
         }, error => {
-          console.log(error.response.data.message)
+          this.$swal("Error!", error.response.data.message, 'error')
         })
     }
   }
