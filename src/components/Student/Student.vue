@@ -149,7 +149,7 @@
 
 import StudentService from '../../services/student.service'
 import CourseService from '../../services/course.service'
-import Addnew from './addStudent.vue'
+import Addnew from '../Student/addStudent.vue'
 export default {
   name: "Student",
   components:{Addnew},
