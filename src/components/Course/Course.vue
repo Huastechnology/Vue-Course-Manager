@@ -5,9 +5,10 @@
         <div class="col-md-12" style="margin-left: 14%;">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title text-uppercase mb-0">Manage courses</h5>
+              <Addcourse/>
+              <h5 class="card-title card-top-tittle text-uppercase mb-0">Manage courses</h5>
             </div>
-            <div class="table-responsive table-div">
+            <div class="table-responsive  table-div">
               <table class="table no-wrap user-table mb-0"> 
                   <ul>
                     <tr>
@@ -33,6 +34,7 @@
                       >
                         <i class="fa fa-trash"></i>
                       </button>
+                      
                       <button
                         type="button"
                         class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
@@ -45,7 +47,7 @@
                       >
                         <i class="fa fa-upload"></i>
                       </button>
-
+                      
                       <div>
                         <b-modal id="bv-modal-example" hide-footer>
                             <template #modal-title>
@@ -85,10 +87,11 @@
 
 <script>
 import CourseService from '../../services/course.service'
+import Addcourse from '../Course/Addcourse.vue'
 
 export default {
   name: "Course",
-  
+  components:{Addcourse},
   data: ()=> ({
     course: '',
     courses : [],
@@ -159,7 +162,13 @@ body{
     background-clip: border-box;
     border: 0 solid transparent;
     border-radius: 0;
+    margin-top: 7%;
+    
 }
+.card-top-tittle{
+  margin-top: 2%;
+}
+
 .btn-circle.btn-lg, .btn-group-lg>.btn-circle.btn {
     width: 50px;
     height: 50px;
