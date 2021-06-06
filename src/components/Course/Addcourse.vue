@@ -68,12 +68,11 @@
 import Courses from "../../models/course";
 import courseService from '../../services/course.service';
 import TeacherService from "../../services/teacher.service";
-// import CourseService from "../../services/course.service";
 
 export default {
   name: "Addcourse",
   data: () => ({
-    course: new Courses("", "", "", ""),
+    course: new Courses("", "", ""),
     teacherStored: localStorage.getItem("name"),
     teacher: "",
     teachers: [],
@@ -116,9 +115,9 @@ export default {
     handleSubmit() {
       this.course.teacher = this.$store.state.auth.user.id;
       
-      
       courseService.createCourse(this.course).then (Response =>{
         alert(Response.data.msg)
+        this.course = {courseName: '', teacher: '', description: '', schedule: []}
       },error =>{
         alert("Error!", 
               (error.response && error.response.data) ||
