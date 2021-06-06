@@ -113,7 +113,10 @@ export default {
     },
 
     handleSubmit() {
-      this.course.teacher = this.$store.state.auth.user.id;
+
+      if(this.$store.state.auth.user.rol !== "admin") {
+        this.course.teacher = this.$store.state.auth.user.id;
+      }
       
       courseService.createCourse(this.course).then (Response =>{
         alert(Response.data.msg)
