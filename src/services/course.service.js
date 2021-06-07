@@ -27,6 +27,17 @@ class CourseService {
             schedule: course.schedule
         },  config)
     }
+    updateCourse(course, id){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.put(API_URL+'course/Id/'+id,{
+            courseName: course.courseName,
+            teacher: course.teacher,
+            description: course.description,
+            schedule: course.schedule
+        }, config)
+    }
 }
 
 

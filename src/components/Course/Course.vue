@@ -21,32 +21,97 @@
                   <tr v-if="courses.length === 0">No hay cursos</tr>
                     <tr v-for="(course, index) in courses" :key="index">
                       <th> {{index + 1 }} </th>
-                      <td> {{course.courseName}}  </td> 
-                      <td> {{course.teacher.completeName}} </td>
-                      <td style="text-align:center;"> {{course.capacity}} </td>
-                      <td v-for="(course_schedule, course_index) in course.schedule" :key="course_index"> {{course_schedule}} </td>
+                      <td> 
+                        <span v-if="update && update_index === index + 1">
+                          <input v-model="course.courseName" class="form-control" />
+                        </span>
+                        <span v-else>
+                          {{course.courseName}}
+                        </span>
+                      </td> 
+                      <td> 
+                        <span v-if="update && update_index === index + 1 && currentUser.rol === 'admin'">
+                          <select v-model="course.teacher">
+                            <option
+                              v-for="(teacher, teacherindex) in teachers"
+                              :key="teacherindex"
+                              :value="teacher._id"
+                            >
+                              {{ teacher.completeName }}
+                            </option>
+                          </select>
+                        </span>
+                        <span v-else>
+                          {{course.teacher.completeName}}
+                        </span>
+                      </td>
+                      <td style="text-align:center;"> 
+                        <span v-if="update && update_index === index + 1">
+                          <input v-model="course.capacity" class="form-control" />
+                        </span>
+                        <span v-else>
+                          {{course.capacity}}
+                        </span>
+                      <td v-if="!update">
+                        <span v-for="(course_schedule, course_index) in course.schedule" :key="course_index">
+                          {{course_schedule}} 
+                        </span>
+                      </td>
+                      <td v-if="update && update_index === index + 1">
+                        <b-form-group
+                          label="Using options array:"
+                          v-slot="{ ariaDescribedby }"
+                        >
+                          <b-form-checkbox-group
+                            id="checkbox-group-1"
+                            v-model="course.schedule"
+                            :aria-describedby="ariaDescribedby"
+                            name="flavour-1"
+                          >
+                            <b-form-checkbox value="7:00-10:00">7:00-10:00</b-form-checkbox>
+                            <b-form-checkbox value="Lunes">Lunes</b-form-checkbox>
+                            <b-form-checkbox value="Martes">Martes</b-form-checkbox>
+                            <b-form-checkbox value="Miercoles">Miercoles</b-form-checkbox>
+                            <b-form-checkbox value="Jueves">Jueves</b-form-checkbox>
+                            <b-form-checkbox value="Viernes">Viernes</b-form-checkbox>
+                          </b-form-checkbox-group>
+                        </b-form-group>
+                      </td>
                       <td>
-                      <button
-                        class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                        id="show-btn"
-                        v-on:click="getId(course._id)"
-                        @click="$bvModal.show('bv-modal-example')"
-                      >
-                        <i class="fa fa-trash"></i>
-                      </button>
-                      
-                      <button
-                        type="button"
-                        class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                      >
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                      >
-                        <i class="fa fa-upload"></i>
-                      </button>
+                      <span v-if="update && update_index == index + 1">
+                        <button
+                          type="button"
+                          class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                          @click="updateCourse(course,course._id)"
+                        >
+                          <i class="fa fa-check-circle"></i>
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                          @click="update=false, getCourses()"
+                          >
+                            <i class="fa fa-ban"></i>
+                        </button>
+                      </span>
+                      <span v-else>
+                        <button
+                          class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                          id="show-btn"
+                          v-on:click="getId(course._id)"
+                          @click="$bvModal.show('bv-modal-example')"
+                        >
+                          <i class="fa fa-trash"></i>
+                        </button>
+                        
+                        <button
+                          type="button"
+                          class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                          v-on:click="editCourse(index+1)"
+                        >
+                          <i class="fa fa-edit"></i>
+                        </button>
+                      </span>
                       
                       <div>
                         <b-modal id="bv-modal-example" hide-footer>
@@ -88,6 +153,7 @@
 <script>
 import CourseService from '../../services/course.service'
 import Addcourse from '../Course/Addcourse.vue'
+import TeacherService from "../../services/teacher.service";
 
 export default {
   name: "Course",
@@ -96,16 +162,35 @@ export default {
     course: '',
     courses : [],
     course_id: '',
+    teachers: [],
+    update: false,
+    update_index: -1,
   }),
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
     },
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
   },
   created() {
     if (!this.loggedIn) {
       this.$router.push("/login");
     }
+  },
+  beforeMount() {
+    TeacherService.getAll().then(
+      (Response) => {
+        if (this.$store.state.auth.user.rol === "admin") {
+          this.teachers = Response.data.msg;
+        }
+      },
+      (error) => {
+        this.$swal("Error!", (error.response && error.response.data) || error.message || 
+        error.toString(), 'error')
+      }
+    );
   },
   mounted(){
       CourseService.getCourse(this.course).then(Response=>{
@@ -124,9 +209,29 @@ export default {
               (error.response && error.response.data) ||
               error.message ||
               error.toString(), 'error')
-          })
+      })
   },
   methods: {
+    getCourses() {
+      this.courses = []
+      CourseService.getCourse(this.course).then(Response=>{
+        if(this.$store.state.auth.user.rol === 'teacher') {
+          for(let i = 0; i < Response.data.matchCourse.length; i++) {
+            if(Response.data.matchCourse[i].teacher.email === this.$store.state.auth.user.email) {
+              this.courses.push(Response.data.matchCourse[i])
+            }
+          }
+        } else {
+          this.courses = Response.data.matchCourse
+        }
+      },
+      (error) => {
+            this.$swal("Error!", 
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString(), 'error')
+      })
+    },
     getId(id) {
       this.course_id = id
     },
@@ -134,9 +239,22 @@ export default {
       CourseService.deleteCourse(this.course_id)
         .then((response) => {
           this.$swal("Successfully!",response.data.message, 'success')
+          this.getCourses()
         }, error => {
           this.$swal("Error!", error.response.data.message, 'error')
         })
+    },
+    editCourse(index){
+      this.update_index = index
+      this.update= true;
+    },
+    updateCourse(course, id) {
+      CourseService.updateCourse(course, id).then(Response => {
+        this.$swal("Successfully!", Response.data.msg, 'success')
+        this.update = false
+      },(error)=>{
+        this.$swal("Error!", error.response.data.message, 'error')
+      })
     }
   }
 }
