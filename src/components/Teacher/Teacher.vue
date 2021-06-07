@@ -82,7 +82,7 @@
                           <button
                             type="button"
                             class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                            @click="update=false"
+                            @click="update=false, getTeachers()"
                           >
                             <i class="fa fa-ban"></i>
                           </button>
@@ -169,6 +169,17 @@ export default {
     );
   },
   methods: {
+    getTeachers() {
+      TeacherService.getAll().then(
+        (Response) => {
+          this.teachers = Response.data.msg;
+        },
+        (error) => {
+          this.$swal("Error!", (error.response && error.response.data) || error.message || 
+          error.toString(), 'error')
+        }
+      );
+    },
     editTeacher(id){
       this.updateid = id
       this.update= true;
@@ -189,6 +200,7 @@ export default {
     deleteTeacher() {
       TeacherService.deleteTeacher(this.teacher_id).then((response) => {
         this.$swal("Successfully!", response.data.msg, 'success')
+        this.getTeachers()
       }, error => {
         this.$swal("Error!", error.response.data.msg, 'error')
       });

@@ -119,7 +119,7 @@
                           <button
                             type="button"
                             class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                            @click="actualizar=false"
+                            @click="actualizar=false, getStudents()"
                             >
                             <i class="fa fa-ban"></i>
                           </button>
@@ -193,7 +193,7 @@ export default {
               (error.response && error.response.data) ||
               error.message ||
               error.toString(), 'error')
-          })
+      })
 
       CourseService.getCourse(this.course).then(Response=>{
         if(this.$store.state.auth.user.rol === 'teacher') {
@@ -211,15 +211,35 @@ export default {
               (error.response && error.response.data) ||
               error.message ||
               error.toString(), 'error')
-          });
+      });
   },
   methods: {
+    getStudents() {
+      StudentService.getAll().then(Response=>{
+        if(this.$store.state.auth.user.rol === 'teacher') {
+          for(let i = 0; i < Response.data.matchStudent.length; i++) {
+            if(Response.data.matchStudent[i].course.teacher.email === this.$store.state.auth.user.email) {
+              this.students.push(Response.data.matchStudent[i])
+            }
+          }
+        } else {
+          this.students = Response.data.matchStudent
+        }
+      },
+      (error) => {
+            this.$swal("Error!",
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString(), 'error')
+      })
+    },
     getId(id){
       this.studentId = id
     },
     deleteStudent(){
       StudentService.delete(this.studentId).then( response => {
         this.$swal("Successfully!", response.data.message, 'success')
+        this.getStudents()
       }, error => {
         this.$swal("Error!", error.response.data.message, 'error')
       })
