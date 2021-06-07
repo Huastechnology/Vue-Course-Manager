@@ -16,6 +16,12 @@ class TeacherService {
         };
         return axios.get(API_URL + 'user/' + user, config)
     }
+    getCurrent(id){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.get(API_URL + 'user/id/' + id, config)
+    }
     deleteTeacher(id){
         const config = {
             headers: { 'Authorization': localStorage.getItem('token') }
