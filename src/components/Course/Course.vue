@@ -68,12 +68,8 @@
                             :aria-describedby="ariaDescribedby"
                             name="flavour-1"
                           >
-                            <b-form-checkbox value="7:00-10:00">7:00-10:00</b-form-checkbox>
-                            <b-form-checkbox value="Lunes">Lunes</b-form-checkbox>
-                            <b-form-checkbox value="Martes">Martes</b-form-checkbox>
-                            <b-form-checkbox value="Miercoles">Miercoles</b-form-checkbox>
-                            <b-form-checkbox value="Jueves">Jueves</b-form-checkbox>
-                            <b-form-checkbox value="Viernes">Viernes</b-form-checkbox>
+                            <b-form-checkbox v-for="(hour, index) in hours" :key="index"  :value="hour">{{hour}}</b-form-checkbox>
+                            <b-form-checkbox v-for="(day,indexday) in days" :key="indexday" :value="day">{{day}}</b-form-checkbox>
                           </b-form-checkbox-group>
                         </b-form-group>
                       </td>
@@ -165,6 +161,19 @@ export default {
     teachers: [],
     update: false,
     update_index: -1,
+    hours: [
+      '7:00am-10:00am', 
+      '10:00am-12:00pm',
+      '12:00pm-14:00pm',
+      '14:00pm-16:00pm'
+    ],
+    days:[ 
+      'Lunes',
+      'Martes',
+      'Miercoles',
+      'Jueves',
+      'Viernes'
+    ]
   }),
   computed: {
     loggedIn() {

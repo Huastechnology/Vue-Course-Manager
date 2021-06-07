@@ -45,11 +45,7 @@
             >
               <b-form-checkbox checked  name="checkbox-1" v-for="(hour, index) in hours" :key="index"  :value="hour" :disabled="state">{{hour}}</b-form-checkbox>
               <b-card-title>Seleccione los dias</b-card-title>
-              <b-form-checkbox value="Lunes">Lunes</b-form-checkbox>
-              <b-form-checkbox value="Martes">Martes</b-form-checkbox>
-              <b-form-checkbox value="Miercoles">Miercoles</b-form-checkbox>
-              <b-form-checkbox value="Jueves">Jueves</b-form-checkbox>
-              <b-form-checkbox value="Viernes">Viernes</b-form-checkbox>
+              <b-form-checkbox v-for="(day,indexday) in days" :key="indexday" :value="day">{{day}}</b-form-checkbox>
             </b-form-checkbox-group>
           </b-form-group>
             <h5>{{ course.schedule }}</h5>
@@ -79,11 +75,18 @@ export default {
     teachers: [],
     schedule: [],
     hours:[
-        '7:00am-10:00am', 
-        '10:00am-12:00pm',
-        '12:00pm-14:00pm',
-        '14:00pm-16:00pm'
-      ],
+      '7:00am-10:00am', 
+      '10:00am-12:00pm',
+      '12:00pm-14:00pm',
+      '14:00pm-16:00pm'
+    ],
+    days:[
+      'Lunes',
+      'Martes',
+      'Miercoles',
+      'Jueves',
+      'Viernes'
+    ]
   }),
   mounted() {
     TeacherService.get(this.teacher).then(
