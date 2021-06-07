@@ -34,7 +34,7 @@
           <h5 v-else :value="currentUser.id">{{  teacherStored }}</h5>
 
           <b-form-group
-            label="Using options array:"
+            label="Seleccione las horas:"
             v-slot="{ ariaDescribedby }"
           >
             <b-form-checkbox-group
@@ -43,7 +43,8 @@
               :aria-describedby="ariaDescribedby"
               name="flavour-1"
             >
-              <b-form-checkbox value="7:00-10:00">7:00-10:00</b-form-checkbox>
+              <b-form-checkbox checked  name="checkbox-1" v-for="(hour, index) in hours" :key="index"  :value="hour" :disabled="state">{{hour}}</b-form-checkbox>
+              <b-card-title>Seleccione los dias</b-card-title>
               <b-form-checkbox value="Lunes">Lunes</b-form-checkbox>
               <b-form-checkbox value="Martes">Martes</b-form-checkbox>
               <b-form-checkbox value="Miercoles">Miercoles</b-form-checkbox>
@@ -52,7 +53,7 @@
             </b-form-checkbox-group>
           </b-form-group>
             <h5>{{ course.schedule }}</h5>
-
+           <button  v-on:click="setEmpty()">Limpiar Horario</button>
           <b-form-input
             v-model="course.description"
             placeholder="Descripcion"
@@ -76,9 +77,13 @@ export default {
     teacherStored: localStorage.getItem("name"),
     teacher: "",
     teachers: [],
-    schedule_string: "",
     schedule: [],
-    
+    hours:[
+        '7:00am-10:00am', 
+        '10:00am-12:00pm',
+        '12:00pm-14:00pm',
+        '14:00pm-16:00pm'
+      ],
   }),
   mounted() {
     TeacherService.get(this.teacher).then(
@@ -103,6 +108,9 @@ export default {
     currentUser() {
       return this.$store.state.auth.user;
     },
+    state(){
+      return this.course.schedule.length >= 1
+    }
   },
   methods: {
     handleOk(bvModalEvt) {
@@ -111,7 +119,9 @@ export default {
       // Trigger submit handler
       this.handleSubmit();
     },
-
+    setEmpty(){
+      this.course.schedule = []
+    },
     handleSubmit() {
 
       if(this.$store.state.auth.user.rol !== "admin") {
