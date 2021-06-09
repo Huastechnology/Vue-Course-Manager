@@ -1,6 +1,12 @@
 <template>
     <div>
-        <Dashboard route10="Schedule" route7="Student" route8="Courses" route9="Teachers"/>
+        <Dashboard 
+            route10="Schedule" 
+            route7="Student" 
+            route8="Courses" 
+            route9="Teachers" 
+            dataInfo="Informacion Personal"
+        />
     </div>
 </template>
 

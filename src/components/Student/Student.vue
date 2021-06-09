@@ -22,6 +22,7 @@
                   </tr>
                     <tr v-for="(student, index) in students" :key="index">
                       <th> {{index + 1 }} </th>
+                      <!-- <td>{{student.name}}</td> -->
                       <td> <!-- {{student.name}} -->  
                         <span v-if="actualizar && actualizarid == index+1">
                           <input v-model="student.name" class="form-control">
@@ -81,19 +82,44 @@
                               <i class="fas fa-check-circle"></i>
                             </button>
                         </span>
-                        <span v-else>
-                           <button
+                          <span v-else>
+                            <button
                               type="button"
-                              class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"                              
+                              class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+                              v-on:click="getId(student._id)"
+                              @click=" $bvModal.show('bv-modal-example')"
                             >
-                              <i class="fa fa-trash"></i>
+                              <i class="fa fa-trash" />
                             </button>
+                            <b-modal id="bv-modal-example" hide-footer>
+                              <template #modal-title> {{mainTitle}} </template>
+                              <div class="d-block text-center">
+                                <h3>{{msgconfirm}}</h3>
+                              </div>
+                              <b-button
+                                class="mt-3"
+                                variant="success"
+                                block
+                                @click="deleteStudent()"
+                                v-on:click="$bvModal.hide('bv-modal-example')"
+                              >
+                                Confirmar
+                              </b-button>
+                              <b-button
+                                class="mt-3"
+                                variant="danger"
+                                block
+                                @click="$bvModal.hide('bv-modal-example')"
+                              >
+                                Cancelar
+                              </b-button>
+                            </b-modal>
                         </span>  
                         <span v-if="actualizar && actualizarid == index+1">
                           <button
                             type="button"
                             class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                            @click="actualizar=false"
+                            @click="actualizar=false, getStudents()"
                             >
                             <i class="fa fa-ban"></i>
                           </button>
@@ -106,18 +132,7 @@
                             >
                               <i class="fa fa-edit"></i>
                             </button>
-                        </span>   
-                        <span v-if="actualizar && actualizarid == index+1">
-                          
-                        </span>
-                        <span v-else>
-                           <button
-                              type="button"
-                              class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"                              
-                            >
-                              <i class="fa fa-upload"></i>
-                            </button>
-                        </span>                       
+                        </span>                         
                     </td>
                     </tr>
                   </ul>
@@ -134,17 +149,22 @@
 
 import StudentService from '../../services/student.service'
 import CourseService from '../../services/course.service'
-import Addnew from './addStudent.vue'
+import Addnew from '../Student/addStudent.vue'
 export default {
   name: "Student",
-components:{Addnew},
+  components:{Addnew},
+  props:{
+    msgconfirm: String,
+    mainTitle: String
+  },
   data: ()=> ({
     students : [],
     courses: [],
     course: '',
     actualizar: false,
     actualizarid: -1,
-    selected: {}
+    selected: {},
+    studentId:''
   }),
   computed: {
     loggedIn() {
@@ -158,14 +178,22 @@ components:{Addnew},
   },
   mounted(){
       StudentService.getAll().then(Response=>{
-        this.students = Response.data.matchStudent
+        if(this.$store.state.auth.user.rol === 'teacher') {
+          for(let i = 0; i < Response.data.matchStudent.length; i++) {
+            if(Response.data.matchStudent[i].course.teacher.email === this.$store.state.auth.user.email) {
+              this.students.push(Response.data.matchStudent[i])
+            }
+          }
+        } else {
+          this.students = Response.data.matchStudent
+        }
       },
       (error) => {
-            alert( 
+            this.$swal("Error!",
               (error.response && error.response.data) ||
               error.message ||
-              error.toString())
-          })
+              error.toString(), 'error')
+      })
 
       CourseService.getCourse(this.course).then(Response=>{
         if(this.$store.state.auth.user.rol === 'teacher') {
@@ -179,13 +207,43 @@ components:{Addnew},
         }
       },
       (error) => {
-            alert( 
+            this.$swal("Error!", 
               (error.response && error.response.data) ||
               error.message ||
-              error.toString())
-          });
+              error.toString(), 'error')
+      });
   },
   methods: {
+    getStudents() {
+      StudentService.getAll().then(Response=>{
+        if(this.$store.state.auth.user.rol === 'teacher') {
+          for(let i = 0; i < Response.data.matchStudent.length; i++) {
+            if(Response.data.matchStudent[i].course.teacher.email === this.$store.state.auth.user.email) {
+              this.students.push(Response.data.matchStudent[i])
+            }
+          }
+        } else {
+          this.students = Response.data.matchStudent
+        }
+      },
+      (error) => {
+            this.$swal("Error!",
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString(), 'error')
+      })
+    },
+    getId(id){
+      this.studentId = id
+    },
+    deleteStudent(){
+      StudentService.delete(this.studentId).then( response => {
+        this.$swal("Successfully!", response.data.message, 'success')
+        this.getStudents()
+      }, error => {
+        this.$swal("Error!", error.response.data.message, 'error')
+      })
+    },
     updateStudent (id){
       this.actualizarid = id
       this.actualizar = true;
@@ -193,12 +251,12 @@ components:{Addnew},
     updatingStudent(user,id){
       user.course = this.selected
       StudentService.update(user, id).then(Response => {        
-        alert(Response.data.msg)
+        this.$swal("Successfully!", Response.data.msg, 'success')
         this.actualizar = false
       },(error)=> {
-        (error.response && error.response.data) ||
-        error.message ||
-        error.toString()
+        this.$swal("Error!", (error.response && error.response.data) ||
+          error.message ||
+          error.toString(), 'error')
       })
     }
   }

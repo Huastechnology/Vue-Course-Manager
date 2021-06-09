@@ -82,7 +82,7 @@
                           <button
                             type="button"
                             class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                            @click="update=false"
+                            @click="update=false, getTeachers()"
                           >
                             <i class="fa fa-ban"></i>
                           </button>
@@ -163,25 +163,33 @@ export default {
         this.teachers = Response.data.msg;
       },
       (error) => {
-        alert(
-          (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        );
+        this.$swal("Error!", (error.response && error.response.data) || error.message || 
+        error.toString(), 'error')
       }
     );
   },
   methods: {
+    getTeachers() {
+      TeacherService.getAll().then(
+        (Response) => {
+          this.teachers = Response.data.msg;
+        },
+        (error) => {
+          this.$swal("Error!", (error.response && error.response.data) || error.message || 
+          error.toString(), 'error')
+        }
+      );
+    },
     editTeacher(id){
       this.updateid = id
       this.update= true;
     },
     updateTeacher(user,id){
       TeacherService.update(user, id).then(Response => {
-        alert(Response.data.msg)
+        this.$swal("Successfully!", Response.data.msg, 'success')
         this.update = false
       },(error)=>{
-        alert(error.response.data.message)
+        this.$swal("Error!", error.response.data.message, 'error')
       })
 
     },
@@ -191,7 +199,10 @@ export default {
     },
     deleteTeacher() {
       TeacherService.deleteTeacher(this.teacher_id).then((response) => {
-        alert(response.data.msg);
+        this.$swal("Successfully!", response.data.msg, 'success')
+        this.getTeachers()
+      }, error => {
+        this.$swal("Error!", error.response.data.msg, 'error')
       });
     },
   },

@@ -40,6 +40,12 @@ class StudentService {
             tutorPhone: user.tutorPhone
         },config)
     }
+    delete(id){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.delete(API_URL+'student/'+id,config)
+    }
 }
 
 export default new StudentService()
