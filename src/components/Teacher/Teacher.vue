@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title text-uppercase mb-0">Manage Teachers</h5>
+              <h5 class="card-title text-uppercase mb-0">Gestionar maestros</h5>
             </div>
             <div class="table-responsive">
               <table class="table no-wrap user-table mb-0">
@@ -18,13 +18,13 @@
                       #
                     </th>
                     <th scope="col" class="border-0 text-uppercase font-medium">
-                      Name
+                      Nombre
                     </th>
                     <th scope="col" class="border-0 text-uppercase font-medium">
-                      Email
+                      Correo
                     </th>
                     <th scope="col" class="border-0 text-uppercase font-medium">
-                      Phone
+                      Celular
                     </th>
                   </tr>
                   <tr v-for="(teacher, index) in teachers" :key="index">

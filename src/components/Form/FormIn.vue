@@ -5,7 +5,7 @@
                 <img src="../../assets/a&a.png" alt="avatar-A&A">
             </div>
 
-            <span class="title">account login</span>
+            <span class="title">Inicio de sesión</span>
             
             <input class="login" type="email" name="email" v-model="user.email" placeholder="E-mail">
             <input class="login" type="password" name="password" v-model="user.password" placeholder="Password">

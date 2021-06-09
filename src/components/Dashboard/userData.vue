@@ -58,7 +58,6 @@
     mounted(){
         TeacherService.getCurrent(localStorage.getItem('id')).then(Response=>{
             this.userData = Response.data.userData
-            console.log(Response.data)
         },error => {
             alert(error.response && error.response.data)
         })

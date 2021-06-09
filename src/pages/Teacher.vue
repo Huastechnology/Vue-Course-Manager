@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Searchbar type="teacher" title="Maestros" colum="#" colum2="Nombre" colum3="Email" colum4="Telefono" colum5="Gestion"/>
+    <Searchbar type="teacher" title="Maestros" colum="#" colum2="Nombre" colum3="Correo" colum4="Teléfono" colum5="Gestión"/>
     <Teacher/>
   </div>
 </template>

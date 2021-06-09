@@ -9,7 +9,7 @@
       colum4="Curso" 
       colum6="Nombre del tutor"  
       colum7="Telefono del tutor" 
-      colum5="Gestion"
+      colum5="Gestión"
     />
     <Student 
       mainTitle="Eliminar Estudiante" 

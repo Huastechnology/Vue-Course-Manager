@@ -29,7 +29,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title text-uppercase mb-0"> Gestionar {{title}} </h5>
+                  <h5 class="card-title text-uppercase mb-0"> Buscar {{title}} </h5>
                 </div>
                 <div class="table-responsive">
                   <table class="table no-wrap user-table mb-0">
@@ -41,7 +41,6 @@
                         <th scope="col" class="border-0 text-uppercase font-medium">{{colum4}}</th>
                         <th v-if="type !== 'teacher'" scope="col" class="border-0 text-uppercase font-medium">{{colum6}}</th>
                         <th  v-if="type !== 'teacher'" scope="col" class="border-0 text-uppercase font-medium">{{colum7}}</th>
-                        <th scope="col" class="border-0 text-uppercase font-medium">{{colum5}}</th>
                       </tr>
                       <tr v-for="(useresponse, index) in userresponse" :key="index">
                         <th>{{index + 1 }}</th>
@@ -52,26 +51,6 @@
                         <td v-if="type !== 'teacher'">{{useresponse.course.courseName}}</td>
                         <td v-if="type !== 'teacher'">{{useresponse.tutorName}}</td>
                         <td v-if="type !== 'teacher'">{{useresponse.tutorPhone}}</td>
-                        <td>
-                          <button
-                            type="button"
-                            class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                          >
-                            <i class="fa fa-trash"></i>
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                          >
-                            <i class="fa fa-edit"></i>
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-                          >
-                            <i class="fa fa-upload"></i>
-                          </button>
-                        </td>
                       </tr>
                     </ul>
                   </table>

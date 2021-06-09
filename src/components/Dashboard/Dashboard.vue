@@ -1,7 +1,7 @@
 <template>
     <Fragment>
         <div class="container_hero">
-            <div class="title"> My Dashboard <img class="img-title" src="./img/dashboard.png" alt=""></div>
+            <div class="title"> Mi perfil <img class="img-title" src="./img/dashboard.png" alt=""></div>
                 <div class="container">
                     <router-link to="/schedule" class="btn-area"> {{ route10 }} <br> <img class="uno" src="./img/calendario.png" alt=""> </router-link>
                     <router-link to="/students" class="btn-area2">{{ route7 }}<br> <img class="dos" src="./img/student.png" alt=""> </router-link>
