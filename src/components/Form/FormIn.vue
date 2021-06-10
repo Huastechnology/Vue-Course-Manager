@@ -5,19 +5,22 @@
                 <img src="../../assets/a&a.png" alt="avatar-A&A">
             </div>
 
-            <span class="title">account login</span>
+            <span class="title">Inicio de sesión</span>
             
             <input class="login" type="email" name="email" v-model="user.email" placeholder="E-mail">
             <input class="login" type="password" name="password" v-model="user.password" placeholder="Password">
             <button class="boton" type="submit">Login</button>
         </form>
+        <particles-bg type="cobweb" :num="40" :bg="true"/>
     </div>
 </template>
 
 <script>
 import User from "../../models/user";
+import { ParticlesBg } from "particles-bg-vue";
 export default {
   name: "FormIn",
+   components:{ParticlesBg},
   data: () => ({
     user: new User("", ""),
   }),
@@ -39,10 +42,9 @@ export default {
             this.$router.push("/");
           },
           (error) => {
-            alert( 
-              (error.response && error.response.data) ||
+            this.$swal("Error!", (error.response && error.response.data) ||
               error.message ||
-              error.toString())
+              error.toString(), 'error')
           }
         );
       }

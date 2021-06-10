@@ -8,8 +8,35 @@ class TeacherService {
         const config = {
             headers: { 'Authorization': localStorage.getItem('token') }
         };
-        console.log(API_URL)
         return axios.get(API_URL + 'user/', config)
+    }
+    get(user){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.get(API_URL + 'user/' + user, config)
+    }
+    getCurrent(id){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.get(API_URL + 'user/id/' + id, config)
+    }
+    deleteTeacher(id){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.delete(API_URL + 'user/' + id, config)
+    }
+    update(user,id){
+        const config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.put(API_URL+'user/'+id,{
+            completeName: user.completeName,
+            phone: user.phone,
+            email: user.email
+        }, config)
     }
 }
 

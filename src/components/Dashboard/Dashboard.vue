@@ -1,12 +1,20 @@
 <template>
     <Fragment>
         <div class="container_hero">
-            <div class="title"> My Dashboard <img class="img-title" src="./img/dashboard.png" alt=""></div>
+            <div class="title"> Mi perfil <img class="img-title" src="./img/dashboard.png" alt=""></div>
                 <div class="container">
                     <router-link to="/schedule" class="btn-area"> {{ route10 }} <br> <img class="uno" src="./img/calendario.png" alt=""> </router-link>
                     <router-link to="/students" class="btn-area2">{{ route7 }}<br> <img class="dos" src="./img/student.png" alt=""> </router-link>
                     <router-link to="/courses" class="btn-area3">{{ route8 }} <br> <img class="uno" src="./img/open-book.png" alt=""> </router-link>
-                    <router-link to="/teachers" class="btn-area4">{{ route9 }} <br> <img class="uno" src="./img/presentation.png" alt=""> </router-link>
+                    <router-link to="/teachers" v-if="currentAdminRol()" class="btn-area4">{{ route9 }} <br> <img class="uno" src="./img/presentation.png" alt=""> </router-link>
+                    <button @click="showModal()" type="button" class="btn-area3">{{dataInfo}} <i class="fa fa-user"></i> </button>
+                    <UserData 
+                        title="Informacion de Cuenta" 
+                        buttonText="Cerrar" 
+                        cross="x"
+                        v-show="isModalVisible" 
+                        @close="closeModal"
+                    />
                 </div>
             </div>
        <div class="slider">
@@ -18,19 +26,26 @@
                 
             </ul>
        </div>
+       <particles-bg type="cobweb"  :num="50" :bg="true"/>
     </Fragment>
 </template>
 
 <script>
 import { Fragment } from 'vue-fragment'
+import { ParticlesBg } from "particles-bg-vue";
+import UserData from './userData.vue'
 export default {
     name: 'Dashboard',
-    components:{ Fragment },
+    data: () => ({
+        isModalVisible: false
+    }),
+    components:{ Fragment ,ParticlesBg , UserData},
     props:{
         route7: String,
         route8: String,
         route9: String,
-        route10: String
+        route10: String,
+        dataInfo: String
     },
     computed:{
         currentUser(){
@@ -41,6 +56,21 @@ export default {
         if(!this.currentUser){
             this.$router.push('/login')
         }
+    },
+    methods: {
+        currentAdminRol(){
+            if(this.$store.state.auth.user !== null && this.$store.state.auth.user.rol === 'admin') {
+                return true
+            } else {
+                return false
+            }
+        },
+        showModal(){
+            this.isModalVisible =  true
+        },
+        closeModal(){
+            this.isModalVisible = false
+        }
     }
 }
 </script>
@@ -50,21 +80,21 @@ export default {
      
     margin: 0;
     padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
 }
 .container_hero{
     justify-content: center;
     display: flex;
     flex-direction: column;
-    background:rgb(176, 223, 231);
+    backdrop-filter: saturate(180%)blur(20px);
+    background-color: rgba(0, 0, 0, 0.123);
+    box-shadow: 2px 2px 5px 1px;
     margin: 1.5%;
     margin-top: 4%;
     border-radius: 15px;
     position:-webkit-sticky;
 }
 .title{
-    background: rgb(176, 223, 231);
+   background:rgba(146, 209, 240, 0);
     margin-left: 8%;
     width: 84%;
     margin-top: 40px;
@@ -80,7 +110,7 @@ export default {
 .container{
     width: 84%;
     height: 160px;
-    background: rgb(176, 223, 231);
+   background:rgba(146, 209, 240, 0);
     display: flex;
     justify-content: center;
     margin-left: 8%;
@@ -146,7 +176,7 @@ export default {
 .slider{
     
     text-align: center;
-    width: 95%;
+    width: 42%;
     margin: auto;
     overflow: hidden;
     margin-top: 10px;

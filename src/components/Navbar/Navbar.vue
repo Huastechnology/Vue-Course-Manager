@@ -5,7 +5,6 @@
                 <ul class="nav-area">
                     <li> <router-link to="/" class="a">{{ route1 }}</router-link></li>
                     <li> <router-link to="/about" class="a">{{ route2 }}</router-link></li>
-                    <li> <router-link to="/contact" class="a">{{ route3 }}</router-link></li>
                     <li> <router-link to="/dashboard" class="a" v-if="currentUser">{{ route6 }}</router-link></li>
                 </ul>
             </nav>
@@ -13,9 +12,9 @@
             <router-link to="/login" class="btn-area">{{ route4 }}</router-link>
         </nav>
         <nav class="nav-button" v-if="currentUser">
-            <router-link to="/signUp" class="btn-area">{{ route5 }}</router-link>
-            <b-button @click.prevent="logOut" variant="outline-info" class="mb-2">
-                <b-icon icon="box-arrow-in-right" aria-hidden="true"></b-icon>Cerrar Sesion
+            <router-link to="/signUp" v-if="currentUser.rol == 'admin'" class="btn-area">{{ route5 }}</router-link>
+            <b-button @click.prevent="logOut" class="btn-area" id="cerrar">
+                Cerrar Sesion
             </b-button>
         </nav>
     </header>
@@ -56,8 +55,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    background-color: #000;
+    backdrop-filter: saturate(180%)blur(20px);
+    background: rgba(0, 0, 0, 0.671);
+    border-bottom: 1px solid rgba(255, 237, 237, 0.692);
+    color: #00000034;
     margin-top: 5px;
     width: 95%;
     height: 60px;
@@ -107,5 +108,8 @@ export default {
 }
 .nav-button{
     padding: 0px 20px;
+}
+#cerrar{
+    font-size: 13px;
 }
 </style>
