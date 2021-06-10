@@ -6,24 +6,24 @@
           <div class="card">
             <div class="card-body">
               <Addnew/>
-              <h5 class="card-title text-uppercase mb-0">Manage Students</h5>
+              <br>
+              <h5 class="card-title text-uppercase mb-0">Gestionar estudiantes</h5>
             </div>
             <div class="table-responsive">
               <table class="table no-wrap user-table mb-0"> 
                   <ul>
                     <tr>
                     <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Course</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Tutor Name</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Tutor Phone</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Nombre</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Correo</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Curso</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Nombre del tutor</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Celular del tutor</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Gestionar</th>
                   </tr>
                     <tr v-for="(student, index) in students" :key="index">
                       <th> {{index + 1 }} </th>
-                      <!-- <td>{{student.name}}</td> -->
-                      <td> <!-- {{student.name}} -->  
+                      <td>
                         <span v-if="actualizar && actualizarid == index+1">
                           <input v-model="student.name" class="form-control">
                         </span>
@@ -31,7 +31,7 @@
                            {{ student.name }}
                         </span>
                       </td> 
-                      <td> <!-- {{student.email}} --> 
+                      <td>
                         <span v-if="actualizar && actualizarid == index+1">
                           <input v-model="student.email"  class="form-control">
                         </span>
@@ -39,9 +39,7 @@
                            {{ student.email }}
                         </span>
                       </td>
-                      <!-- <td  v-if="student.course.length === 0"> No hay cursos </td> -->
-                      <!-- <td v-for="(course, course_index) in student.course " :key="course_index"> {{course}} </td> -->
-                      <td><!-- {{student.course.courseName}} -->
+                      <td>
                         <span v-if="actualizar && actualizarid == index+1">
                          
                          <select v-model="selected">
@@ -56,7 +54,7 @@
                            {{ student.course.courseName }}
                         </span>
                       </td>
-                      <td> <!-- {{student.tutorName}} --> 
+                      <td>
                         <span v-if="actualizar && actualizarid == index+1">
                           <input v-model="student.tutorName" class="form-control">
                         </span>
@@ -64,7 +62,7 @@
                            {{ student.tutorName }}
                         </span>
                       </td> 
-                      <td> <!-- {{student.tutorPhone}} --> 
+                      <td>
                         <span v-if="actualizar && actualizarid == index+1">
                           <input v-model="student.tutorPhone" class="form-control">
                         </span>

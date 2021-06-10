@@ -1,11 +1,11 @@
 <template>
     <div>
         <Dashboard 
-            route10="Schedule" 
-            route7="Student" 
-            route8="Courses" 
-            route9="Teachers" 
-            dataInfo="Informacion Personal"
+            route10="Horario" 
+            route7="Studiantes" 
+            route8="Cursos" 
+            route9="Docentes" 
+            dataInfo="Información Personal"
         />
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar route1="Inicio" route2="About" route3="Contact" route4="LogIn" route5="Agregar nuevo" route6="Dashboard" route7="cerrar sesion"/>
+    <Navbar route1="Inicio" route2="Conócenos" route3="Contact" route4="Iniciar sesión" route5="Agregar docente" route6="Perfil" route7="Cerrar sesion"/>
     <router-view/>
   </div>
 </template>

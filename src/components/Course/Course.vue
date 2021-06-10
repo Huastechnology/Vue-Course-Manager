@@ -6,17 +6,18 @@
           <div class="card">
             <div class="card-body">
               <Addcourse/>
-              <h5 class="card-title card-top-tittle text-uppercase mb-0">Manage courses</h5>
+              <h5 class="card-title card-top-tittle text-uppercase mb-0">Gestionar mis cursos</h5>
             </div>
             <div class="table-responsive  table-div">
               <table class="table no-wrap user-table mb-0"> 
                   <ul>
                     <tr>
                     <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Course</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Teacher</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Capacity</th>
-                    <th scope="col" class="border-0 text-uppercase font-medium">Schedule</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Curso</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Docente</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Capacidad</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Horario</th>
+                    <th scope="col" class="border-0 text-uppercase font-medium">Gestionar</th>
                   </tr>
                   <tr v-if="courses.length === 0">No hay cursos</tr>
                     <tr v-for="(course, index) in courses" :key="index">
@@ -59,7 +60,7 @@
                       </td>
                       <td v-if="update && update_index === index + 1">
                         <b-form-group
-                          label="Using options array:"
+                          label="Elija el horario:"
                           v-slot="{ ariaDescribedby }"
                         >
                           <b-form-checkbox-group

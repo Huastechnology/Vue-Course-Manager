@@ -5,7 +5,6 @@
                 <ul class="nav-area">
                     <li> <router-link to="/" class="a">{{ route1 }}</router-link></li>
                     <li> <router-link to="/about" class="a">{{ route2 }}</router-link></li>
-                    <li> <router-link to="/contact" class="a">{{ route3 }}</router-link></li>
                     <li> <router-link to="/dashboard" class="a" v-if="currentUser">{{ route6 }}</router-link></li>
                 </ul>
             </nav>
